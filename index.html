@@ -84,7 +84,7 @@
                   <li>휴대폰 텔레그램으로 알림 받기</li>
                 </ul>
               </div>
-              <a class="btn btn-secondary web-app-link" target="_blank" rel="noopener">앱 받으러 가기</a>
+              <button type="button" class="btn btn-secondary" data-goto="app">앱 받으러 가기</button>
             </li>
           </ol>
           <div class="next-card-footer">
@@ -170,7 +170,50 @@
             <li>휴대폰 텔레그램으로 알림 받기</li>
           </ul>
           <p class="integration-note">Mac · Windows 컴퓨터용이에요. 휴대폰에는 깔 수 없어요.</p>
-          <a class="btn btn-primary web-app-link" target="_blank" rel="noopener">에이아이고 앱 받으러 가기</a>
+
+          <div class="web-download">
+            <h2 class="web-download-title">1. 내 컴퓨터에 맞는 파일 받기</h2>
+            <p id="download-hint" class="web-download-hint"></p>
+            <div class="web-download-btns">
+              <a class="btn web-dl-btn" data-dl="windows" rel="noopener"><span class="web-dl-name">Windows</span><span class="web-dl-sub">설치 파일 (.exe)</span></a>
+              <a class="btn web-dl-btn" data-dl="mac-apple" rel="noopener"><span class="web-dl-name">요즘 Mac (Apple 칩)</span><span class="web-dl-sub">M1·M2·M3·M4 · 2021년 무렵 이후</span></a>
+              <a class="btn web-dl-btn" data-dl="mac-intel" rel="noopener"><span class="web-dl-name">예전 Mac (인텔 칩)</span><span class="web-dl-sub">2020년 무렵 이전</span></a>
+            </div>
+            <details id="mac-chip-help" class="step-more">
+              <summary>내 Mac이 어떤 칩인지 모르겠어요</summary>
+              <p class="step-more-text">화면 왼쪽 위 사과 모양() 메뉴 → <strong>이 Mac에 관하여</strong>를 누르세요. "칩"에 <strong>Apple</strong>이라고 쓰여 있으면 요즘 Mac, "프로세서"에 <strong>Intel</strong>이라고 쓰여 있으면 예전 Mac이에요.</p>
+            </details>
+            <p class="integration-note">누르면 파일이 바로 내려받아져요. 보통 <strong>다운로드</strong> 폴더에 들어가요.</p>
+          </div>
+
+          <div class="web-download">
+            <h2 class="web-download-title">2. 처음 한 번 여는 법</h2>
+            <p class="web-download-hint">무료로 나눠 드리는 앱이라 Apple · Microsoft의 유료 인증을 받지 않았어요. 그래서 <strong>처음 한 번만</strong> 컴퓨터가 "확인되지 않은 앱"이라며 막아요. 아래대로 한 번 열면 다음부터는 그냥 열려요.</p>
+            <div class="web-install-guides">
+              <section id="guide-mac" class="web-install-guide">
+                <h3>Mac</h3>
+                <ol>
+                  <li>받은 <code>.dmg</code> 파일을 두 번 누르고, 앱 아이콘을 <strong>응용 프로그램</strong> 폴더로 끌어다 놓아요.</li>
+                  <li>응용 프로그램 폴더에서 <strong>AigoAI</strong>(에이아이고)를 두 번 눌러요.</li>
+                  <li>"확인되지 않은 개발자" 창이 뜨면 <strong>[완료]</strong>(또는 [취소])를 눌러요.</li>
+                  <li>화면 왼쪽 위 사과 모양() 메뉴 → <strong>시스템 설정</strong> → <strong>개인정보 보호 및 보안</strong>을 열어요.</li>
+                  <li>맨 아래로 내리면 "AigoAI이(가) 차단되었습니다" 옆에 <strong>[그래도 열기]</strong>가 있어요. 눌러요.</li>
+                  <li>Mac 비밀번호를 넣고, 다시 뜨는 창에서 <strong>[열기]</strong>를 눌러요.</li>
+                </ol>
+              </section>
+              <section id="guide-windows" class="web-install-guide">
+                <h3>Windows</h3>
+                <ol>
+                  <li>받은 <code>.exe</code> 파일을 두 번 눌러요.</li>
+                  <li>파란 <strong>"Windows의 PC 보호"</strong> 창이 뜨면 글자 <strong>[추가 정보]</strong>를 눌러요.</li>
+                  <li>아래에 생긴 <strong>[실행]</strong> 버튼을 눌러요.</li>
+                  <li>"이 앱이 디바이스를 변경하도록 허용하시겠어요?" 창이 뜨면 <strong>[예]</strong>를 누르고 설치를 마쳐요.</li>
+                </ol>
+              </section>
+            </div>
+          </div>
+
+          <p class="integration-note">다른 버전이나 파일 목록은 <a class="web-app-link" target="_blank" rel="noopener">내려받기 페이지(GitHub)</a>에서 볼 수 있어요.</p>
           <p id="app-version" class="integration-note"></p>
         </section>
       </div>

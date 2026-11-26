@@ -166,6 +166,7 @@
       btn.classList.toggle('active', btn.getAttribute('data-tab') === tab);
     });
     if (tab === 'habits') window.LearnTab.render();
+    if (tab === 'app') trackEvent('web/get-app');
     hideTooltip();
     window.scrollTo(0, 0);
   }
@@ -452,12 +453,14 @@
           <p>로컬 Ollama는 AI 모델을 내려받을 때 까만 터미널 창이 필요해서, 이 웹 페이지로는 도와드릴 수 없어요.
           에이아이고 앱을 받으시면 버튼 하나로 해 드려요.</p>
         `;
-        const link = document.createElement('a');
+        const link = document.createElement('button');
+        link.type = 'button';
         link.className = 'btn btn-secondary';
-        link.href = state.content.app.downloadPageUrl;
-        link.target = '_blank';
-        link.rel = 'noopener';
         link.textContent = '에이아이고 앱 받으러 가기';
+        link.addEventListener('click', () => {
+          close();
+          showTab('app');
+        });
         note.appendChild(link);
         el.welcome.body.appendChild(note);
       }
@@ -626,6 +629,69 @@
     });
   }
 
+  // --- 앱 받기: 이 컴퓨터에 맞는 설치 파일을 바로 받는다 ---
+  function detectComputer() {
+    const ua = navigator.userAgent || '';
+    const uaPlatform = (navigator.userAgentData && navigator.userAgentData.platform) || '';
+    const touch = navigator.maxTouchPoints > 1;
+    if (/Android|iPhone|iPad|iPod/i.test(ua) || (/Macintosh/.test(ua) && touch)) return 'phone';
+    if (/Windows/i.test(uaPlatform) || /Windows/i.test(ua)) return 'windows';
+    if (/macOS/i.test(uaPlatform) || /Macintosh/i.test(ua)) return 'mac';
+    return 'other';
+  }
+
+  async function detectMacChip() {
+    // Chrome · Edge만 알려 준다. Safari는 알 수 없어서 버튼을 둘 다 보여 준다.
+    try {
+      if (!navigator.userAgentData || !navigator.userAgentData.getHighEntropyValues) return '';
+      const v = await navigator.userAgentData.getHighEntropyValues(['architecture']);
+      if (v.architecture === 'arm') return 'mac-apple';
+      if (v.architecture === 'x86') return 'mac-intel';
+    } catch {
+      // 모르면 빈 칸
+    }
+    return '';
+  }
+
+  async function renderDownloads() {
+    const files = state.content.app.downloads || {};
+    const pageUrl = state.content.app.downloadPageUrl;
+    const buttons = Array.from(document.querySelectorAll('[data-dl]'));
+    buttons.forEach((btn) => {
+      const kind = btn.getAttribute('data-dl');
+      const url = typeof files[kind] === 'string' && files[kind].startsWith('https://') ? files[kind] : pageUrl;
+      btn.href = url;
+      if (url === pageUrl) btn.target = '_blank';
+      btn.addEventListener('click', () => trackEvent(`web/download/${kind}`));
+    });
+
+    const computer = detectComputer();
+    const chip = computer === 'mac' ? await detectMacChip() : '';
+    const picks = computer === 'windows' ? ['windows'] : computer === 'mac' ? (chip ? [chip] : ['mac-apple', 'mac-intel']) : [];
+    const order = [...picks, ...['windows', 'mac-apple', 'mac-intel'].filter((k) => !picks.includes(k))];
+    buttons.forEach((btn) => {
+      const kind = btn.getAttribute('data-dl');
+      const picked = picks.includes(kind);
+      btn.style.order = String(order.indexOf(kind));
+      btn.classList.toggle('btn-primary', picked);
+      btn.classList.toggle('btn-secondary', !picked);
+    });
+
+    const hints = {
+      windows: '이 컴퓨터는 <strong>Windows</strong>예요. 파란 버튼을 누르세요.',
+      'mac-apple': '이 컴퓨터는 <strong>요즘 Mac(Apple 칩)</strong>이에요. 파란 버튼을 누르세요.',
+      'mac-intel': '이 컴퓨터는 <strong>예전 Mac(인텔 칩)</strong>이에요. 파란 버튼을 누르세요.',
+      mac: '이 컴퓨터는 <strong>Mac</strong>이에요. 칩 종류에 맞는 버튼을 누르세요. 2021년 무렵 이후에 산 Mac이면 대부분 Apple 칩이에요.',
+      phone: '휴대폰에는 깔 수 없어요. 이 주소를 <strong>컴퓨터</strong>에서 열어 주세요.',
+      other: '내 컴퓨터에 맞는 버튼을 누르세요.',
+    };
+    $('download-hint').innerHTML = hints[chip || computer] || hints.other;
+    $('mac-chip-help').classList.toggle('hidden', computer !== 'mac' || Boolean(chip));
+    // 이 컴퓨터의 여는 법을 먼저 보인다
+    const guides = $('guide-mac').parentElement;
+    if (computer === 'windows') guides.insertBefore($('guide-windows'), $('guide-mac'));
+  }
+
   // --- 시작 ---
   function bindEvents() {
     el.tabs.addEventListener('click', (e) => {
@@ -685,10 +751,7 @@
     el.appVersion.textContent = `지금 버전: v${state.content.app.version}`;
 
     trackPageView();
-    document.addEventListener('click', (e) => {
-      const link = e.target.closest('a');
-      if (link && link.href && link.href === state.content.app.downloadPageUrl) trackEvent('web/get-app');
-    });
+    renderDownloads();
 
     applyFontScale(currentFontScale());
     bindEvents();

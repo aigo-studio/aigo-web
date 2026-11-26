@@ -492,7 +492,12 @@
   ],
   "app": {
     "downloadPageUrl": "https://github.com/aigo-studio/aigo-release/releases/latest",
-    "version": "0.1.0"
+    "version": "0.1.0",
+    "downloads": {
+      "mac-apple": "https://github.com/aigo-studio/aigo-release/releases/download/v0.1.0/Aigo-0.1.0-mac-apple.dmg",
+      "mac-intel": "https://github.com/aigo-studio/aigo-release/releases/download/v0.1.0/Aigo-0.1.0-mac-intel.dmg",
+      "windows": "https://github.com/aigo-studio/aigo-release/releases/download/v0.1.0/Aigo-Setup-0.1.0-windows.exe"
+    }
   },
   "stats": {
     "endpoint": "https://aigo.goatcounter.com/count"

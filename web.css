@@ -123,6 +123,96 @@ a.btn {
   flex: 0 0 auto;
 }
 
+/* "다음에 해 볼 것" 카드를 아래 단계 카드와 같은 왼쪽 줄에 맞춘다 */
+.web .next-card {
+  align-self: flex-start;
+}
+
+/* 카드 안 혜택 목록: 바깥 목록의 상자 모양을 물려받지 않게 */
+.next-card-list .web-app-perks li {
+  display: list-item;
+  background: none;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+}
+
+/* 앱 받기: 바로 받기 버튼 · 처음 여는 법 */
+.web-download {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 18px;
+  border-top: 1px solid var(--border);
+}
+
+.web-download-title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--ink);
+}
+
+.web-download-hint {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--ink);
+}
+
+.web-download-btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.web-download .web-dl-btn {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  min-width: 220px;
+  padding: 14px 20px;
+  text-decoration: none;
+}
+
+.web-dl-name {
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.web-dl-sub {
+  font-size: 14px;
+  font-weight: 500;
+  opacity: 0.85;
+}
+
+.web-install-guides {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 14px;
+}
+
+.web-install-guide {
+  padding: 16px 18px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+}
+
+.web-install-guide h3 {
+  margin: 0 0 8px;
+  font-size: 18px;
+}
+
+.web-install-guide ol {
+  margin: 0;
+  padding-left: 22px;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
 /* 수업: 웹에서는 실행 버튼 대신 안내 한 줄 */
 .lesson-app-only {
   margin: 4px 0 0;
