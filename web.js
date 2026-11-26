@@ -297,6 +297,7 @@
     const nowDone = !isDone(step.id);
     setDone(step.id, nowDone);
     if (nowDone) {
+      trackEvent(`web/step/${state.stepIndex + 1}-done`);
       if (allDone()) {
         state.nextCardClosed = false;
         renderSetup();
@@ -311,7 +312,39 @@
     renderSetup();
   }
 
-  function selectAgent(agentId) {
+  // --- 사용 통계 (지시서 09): GoatCounter 픽셀 하나만. 외부 스크립트는 쓰지 않는다 ---
+  function statsEndpoint() {
+    const ep = state.content && state.content.stats && state.content.stats.endpoint;
+    if (typeof ep !== 'string' || !/^https:\/\/[a-z0-9-]+\.goatcounter\.com\/count$/.test(ep)) return '';
+    const host = window.location.hostname;
+    if (window.location.protocol === 'file:' || host === 'localhost' || host === '127.0.0.1') return '';
+    return ep;
+  }
+
+  function sendStat(params) {
+    const ep = statsEndpoint();
+    if (!ep) return;
+    try {
+      const q = new URLSearchParams({ ...params, rnd: String(Math.random()).slice(2, 10) });
+      new Image().src = `${ep}?${q}`;
+    } catch {
+      // 조용히 넘어간다
+    }
+  }
+
+  function trackEvent(label) {
+    if (!/^[a-z0-9./-]+$/.test(label)) return;
+    sendStat({ p: label, t: label, e: 'true' });
+  }
+
+  function trackPageView() {
+    const params = { p: '/', t: document.title };
+    if (document.referrer) params.r = document.referrer;
+    sendStat(params);
+  }
+
+  function selectAgent(agentId, { track = true } = {}) {
+    if (track) trackEvent(`web/agent/${agentId}`);
     state.agentId = agentId;
     writeStore(STORE.agent, agentId);
     const list = steps();
@@ -651,6 +684,12 @@
     });
     el.appVersion.textContent = `지금 버전: v${state.content.app.version}`;
 
+    trackPageView();
+    document.addEventListener('click', (e) => {
+      const link = e.target.closest('a');
+      if (link && link.href && link.href === state.content.app.downloadPageUrl) trackEvent('web/get-app');
+    });
+
     applyFontScale(currentFontScale());
     bindEvents();
     initGlossary();
@@ -668,7 +707,7 @@
     const saved = readStore(STORE.agent, null);
     const savedAgent = saved && agentById(saved);
     if (savedAgent && savedAgent.webReady) {
-      selectAgent(saved);
+      selectAgent(saved, { track: false });
       hideBoot();
     } else {
       renderAgentBar();

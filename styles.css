@@ -83,6 +83,40 @@ body {
   height: 18px;
 }
 
+/* 사용 통계 켜기/끄기 (지시서 09): 눈에 덜 띄게 */
+.stats-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 10px;
+  font-size: 14px;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.stats-toggle input {
+  width: 16px;
+  height: 16px;
+}
+
+.welcome-stats-note {
+  margin: 12px 0 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.welcome-stats-note .link-btn {
+  margin-left: 6px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 .agent-bar {
   display: flex;
   align-items: center;

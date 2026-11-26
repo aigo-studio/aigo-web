@@ -493,5 +493,8 @@
   "app": {
     "downloadPageUrl": "https://github.com/aigo-studio/aigo-release/releases/latest",
     "version": "0.1.0"
+  },
+  "stats": {
+    "endpoint": "https://aigo.goatcounter.com/count"
   }
 }
