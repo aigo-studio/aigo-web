@@ -1,0 +1,334 @@
+/*
+ * 웹 첫걸음 페이지 전용 스타일 (지시서 08).
+ * 공통 모양은 styles.css(데스크톱 앱과 같은 파일)에서 받고, 여기에는 웹에만 필요한 것만 둔다.
+ */
+
+/* 앱은 창 안에서 본문만 스크롤하지만, 웹은 페이지 전체가 자연스럽게 스크롤한다 */
+body.web .app-shell {
+  height: auto;
+  min-height: 100vh;
+}
+
+body.web .content,
+body.web .recipes-view {
+  overflow: visible;
+}
+
+body.web .sidebar {
+  overflow: visible;
+}
+
+/* 위 메뉴는 한 줄, 본문보다 작게 (지시서 06 §3.3) */
+body.web .main-tabs {
+  flex-wrap: nowrap;
+}
+
+body.web .tab-btn {
+  font-size: 15px;
+  padding: 8px 14px;
+}
+
+/* 처음 화면 로고 */
+.web-welcome-logo {
+  width: 72px;
+  height: 72px;
+  border-radius: 18px;
+  align-self: flex-start;
+}
+
+.boot-icon {
+  width: 72px;
+  height: 72px;
+}
+
+/* 비서 카드: Ollama "앱이 필요해요" 꼬리표 */
+.welcome-rec.web-tag-app {
+  background: var(--warn-bg);
+  color: var(--warn-ink);
+}
+
+.web-ollama-note {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.web-ollama-note p {
+  margin: 0;
+}
+
+/* 1부 할 일: 링크 버튼(<a>)과 완료 버튼 */
+a.btn {
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
+.web-link-btn {
+  display: block;
+}
+
+.web-done-btn {
+  align-self: stretch;
+}
+
+.web-done-btn.btn-primary {
+  min-width: 0;
+}
+
+.web-done-btn.is-done {
+  background: var(--success-bg);
+  color: var(--success-ink);
+}
+
+/* 휴대폰에서 1부 ① 위 안내 */
+.web-mobile-notice {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: var(--warn-bg);
+  color: var(--warn-ink);
+  border: 2px solid #f1d3a1;
+}
+
+.web-mobile-notice p {
+  margin: 0;
+}
+
+/* "다음에 해 볼 것" · 앱 받기 */
+.web-app-perks {
+  margin: 6px 0 0;
+  padding-left: 22px;
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.next-card-list .web-app-link {
+  flex-shrink: 0;
+}
+
+.web-app-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.web-app-card .btn-primary {
+  flex: 0 0 auto;
+}
+
+/* 수업: 웹에서는 실행 버튼 대신 안내 한 줄 */
+.lesson-app-only {
+  margin: 4px 0 0;
+  padding: 12px 16px;
+  border-radius: 12px;
+  background: #f2f5fa;
+  border: 1px dashed #b8c3d4;
+  color: var(--muted);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* 용어사전 페이지 */
+.web-glossary-page-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+/* ===== 휴대폰 (600px 아래): 1열 ===== */
+@media (max-width: 600px) {
+  body {
+    font-size: 17px;
+  }
+
+  .topbar {
+    padding: 10px 12px;
+    gap: 8px;
+  }
+
+  .brand-title {
+    font-size: 19px;
+  }
+
+  body.web .main-tabs {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  body.web .tab-btn {
+    font-size: 14px;
+    padding: 7px 10px;
+  }
+
+  .agent-bar {
+    padding: 8px 12px;
+    gap: 8px;
+  }
+
+  .agent-bar .topbar-controls {
+    margin-left: 0;
+  }
+
+  .workspace {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: auto;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    padding: 12px;
+    gap: 10px;
+  }
+
+  .step-list {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .step-list .step-item {
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 8px 6px;
+    justify-content: center;
+  }
+
+  /* 좁은 폭에서는 "대기/완료" 표시 대신 완료한 단계에만 ✓ */
+  .step-list .step-dot {
+    display: none;
+  }
+
+  .step-list .step-item.done .step-item-name::before {
+    content: '✓ ';
+    color: var(--success-ink);
+  }
+
+  .content,
+  .recipes-view {
+    padding: 12px;
+  }
+
+  .step-card {
+    padding: 14px;
+    border-radius: 16px;
+  }
+
+  .step-do {
+    padding: 12px;
+  }
+
+  .step-title {
+    font-size: 22px;
+  }
+
+  .btn {
+    padding: 14px 16px;
+    font-size: 17px;
+  }
+
+  .btn-primary {
+    min-width: 0;
+  }
+
+  .prompt-grid,
+  .welcome-grid,
+  .web-glossary-page-list,
+  .recipe-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .welcome-view {
+    padding: 12px;
+  }
+
+  .welcome-panel {
+    padding: 20px 16px;
+    border-radius: 18px;
+  }
+
+  .welcome-title {
+    font-size: 24px;
+  }
+
+  .welcome-font-btn {
+    min-width: 0;
+    flex: 1;
+  }
+
+  .welcome-nav .btn-primary {
+    min-width: 0;
+  }
+
+  .next-card {
+    padding: 16px;
+  }
+
+  .next-card-list li {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .recipe-detail {
+    padding: 16px;
+  }
+
+  .lesson-cards {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .usage-row {
+    grid-template-columns: minmax(0, 1fr) 56px;
+  }
+
+  .usage-row .usage-row-label {
+    grid-column: 1 / -1;
+  }
+
+  .usage-slider {
+    min-width: 0;
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .usage-control {
+    flex-wrap: wrap;
+  }
+
+  .glossary-drawer {
+    width: 100vw;
+    max-width: 100vw;
+  }
+
+  .glossary-tooltip {
+    max-width: calc(100vw - 24px);
+  }
+
+  /* 휴대폰에서는 글씨 크기를 zoom 대신 기본 글자 크기로만 키워 가로 넘침을 막는다 */
+  body.font-large .content,
+  body.font-large .recipes-view,
+  body.font-large .glossary-drawer,
+  body.font-large .welcome-panel,
+  body.font-xlarge .content,
+  body.font-xlarge .recipes-view,
+  body.font-xlarge .glossary-drawer,
+  body.font-xlarge .welcome-panel {
+    zoom: 1;
+  }
+
+  body.font-large {
+    font-size: 19px;
+  }
+
+  body.font-xlarge {
+    font-size: 21px;
+  }
+}

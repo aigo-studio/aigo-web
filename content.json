@@ -1,0 +1,497 @@
+{
+  "agents": [
+    {
+      "id": "gemini",
+      "name": "Gemini",
+      "provider": "Google",
+      "guiAppName": "Gemini 데스크톱 앱",
+      "welcome": {
+        "desc": "구글이 만든 AI 비서예요. 평소 쓰시는 Gmail 계정으로 바로 시작해요.",
+        "needs": "구글(Gmail) 계정",
+        "recommended": true
+      },
+      "webReady": true
+    },
+    {
+      "id": "codex",
+      "name": "OpenAI Codex",
+      "provider": "OpenAI",
+      "guiAppName": "OpenAI Codex App / IDE",
+      "welcome": {
+        "desc": "ChatGPT를 만든 회사의 AI 비서예요. 무언가를 만들 때 특히 잘 도와요.",
+        "needs": "ChatGPT 계정",
+        "recommended": false
+      },
+      "webReady": true
+    },
+    {
+      "id": "claude",
+      "name": "Claude",
+      "provider": "Anthropic",
+      "guiAppName": "Claude Desktop",
+      "welcome": {
+        "desc": "긴 글을 읽고 정리하는 데 강한 AI 비서예요.",
+        "needs": "Claude 계정",
+        "recommended": false
+      },
+      "webReady": true
+    },
+    {
+      "id": "ollama",
+      "name": "로컬 Ollama",
+      "provider": "내 PC 무료 실행",
+      "guiAppName": "Ollama 데스크톱 앱",
+      "welcome": {
+        "desc": "인터넷 없이 내 컴퓨터 안에서만 돌아가요. 대답이 느릴 수 있어요.",
+        "needs": "넉넉한 컴퓨터 성능, 가입 필요 없음",
+        "recommended": false
+      },
+      "webReady": false
+    }
+  ],
+  "steps": {
+    "gemini": [
+      {
+        "id": "install-agent-cli",
+        "shortTitle": "1. 앱 설치",
+        "title": "Gemini 데스크톱 앱 설치하기",
+        "summary": "AI 비서와 대화하는 앱(Gemini 데스크톱 앱)을 버튼 하나로 설치해요.",
+        "details": "까만 터미널 대신 화면을 보며 쓰는 앱입니다. 자동 설치가 안 되는 컴퓨터에서는 공식 다운로드 페이지를 대신 열어 드려요. 이미 설치되어 있으면 [상태 다시 확인]만 누르세요.",
+        "externalLink": {
+          "label": "Gemini 데스크톱 앱 공식 다운로드 페이지 직접 열기",
+          "url": "https://gemini.google/desktop/"
+        },
+        "permissionGuide": {
+          "title": "권한 안내 — 프로그램 설치 승인 (필요할 때 1회)",
+          "what": "Mac 비밀번호 창이나 Windows 허용(UAC) 창이 뜨면 확인을 눌러 주세요.",
+          "benefit": "승인해 주시면 복잡한 웹사이트 이동이나 설치 마법사 클릭 없이 버튼 하나로 앱 설치가 끝납니다.",
+          "safety": "미리 검증된 공식 패키지 관리자(Homebrew · winget)와 공식 다운로드 주소만 사용합니다."
+        },
+        "web": {
+          "summary": "아래 버튼을 누르면 Gemini 데스크톱 앱 공식 다운로드 페이지가 열려요. 받은 파일을 열어 설치해 주세요.",
+          "details": "까만 터미널 대신 화면을 보며 쓰는 앱이에요. 이미 설치되어 있으면 [설치했어요]만 누르세요.",
+          "notice": "설치할 때 Mac 비밀번호 창이나 Windows 허용 창이 뜰 수 있어요. 확인을 눌러 주세요.",
+          "buttonLabel": "Gemini 데스크톱 앱 공식 다운로드 페이지 열기",
+          "doneLabel": "설치했어요"
+        }
+      },
+      {
+        "id": "save-api-key",
+        "shortTitle": "2. 로그인",
+        "title": "Gemini 데스크톱 앱 열고 로그인하기",
+        "summary": "앱을 열고, 쓰시던 계정으로 로그인하세요. 열쇠(API 키)는 필요 없어요.",
+        "details": "복잡한 API 키 없이 평소 쓰시는 개인 Google 계정(Gmail)으로 로그인하면 바로 시작할 수 있으며, 익숙해지면 앱 안에서 원클릭으로 Google Antigravity를 열 수 있습니다.",
+        "web": {
+          "summary": "설치한 앱을 열고, 쓰시던 계정으로 로그인하세요. 열쇠(API 키)는 필요 없어요.",
+          "notice": "",
+          "buttonLabel": "",
+          "doneLabel": "로그인했어요"
+        }
+      },
+      {
+        "id": "first-mission",
+        "shortTitle": "3. 첫 대화",
+        "title": "첫 대화! Gemini 데스크톱 앱에 물어보기",
+        "summary": "앱 창 아래 입력칸에 이렇게 물어보세요. 카드를 눌러 복사해 붙여 넣으면 돼요.",
+        "details": "[질문 복사하기]를 누른 뒤 앱 입력칸에 붙여 넣으세요. 붙여 넣기는 Mac은 Command+V, Windows는 Ctrl+V예요. 답이 마음에 안 들면 \"더 짧게\", \"더 쉽게\"라고 다시 말하면 돼요. 대화를 해 보셨으면 맨 아래 버튼으로 완료 표시를 해 주세요.",
+        "promptExamples": [
+          {
+            "category": "장보기 · 요리",
+            "text": "냉장고에 두부, 양파, 계란, 애호박이 있어. 어른 입맛에 맞는 덜 짠 저녁 반찬 2가지와 간단한 만드는 법을 알려 줘."
+          },
+          {
+            "category": "병원 · 건강 메모",
+            "text": "다음 주에 내과 정기 검진을 가. 병원 가기 전 챙길 준비물과 의사 선생님께 여쭤볼 질문 3가지를 정리해 줘."
+          },
+          {
+            "category": "가족 · 인사말",
+            "text": "오랜만에 만나는 친척 모임 단톡방에 보낼 따뜻하고 부담 없는 안부 인사말을 2가지 버전으로 써 줘."
+          },
+          {
+            "category": "날씨 · 뉴스",
+            "text": "오늘 서울 날씨에 맞는 옷차림을 알려 주고, 오늘의 주요 뉴스 3가지를 쉬운 말로 짧게 요약해 줘."
+          }
+        ],
+        "web": {
+          "summary": "앱 창 아래 입력칸에 이렇게 물어보세요. 카드를 눌러 복사해 붙여 넣으면 돼요.",
+          "notice": "",
+          "buttonLabel": "",
+          "doneLabel": "첫 대화 해 봤어요"
+        }
+      }
+    ],
+    "claude": [
+      {
+        "id": "install-agent-cli",
+        "shortTitle": "1. 앱 설치",
+        "title": "Claude Desktop 설치하기",
+        "summary": "AI 비서와 대화하는 앱(Claude Desktop)을 버튼 하나로 설치해요.",
+        "details": "까만 터미널 대신 화면을 보며 쓰는 앱입니다. 자동 설치가 안 되는 컴퓨터에서는 공식 다운로드 페이지를 대신 열어 드려요. 이미 설치되어 있으면 [상태 다시 확인]만 누르세요.",
+        "externalLink": {
+          "label": "Claude Desktop 공식 다운로드 페이지 직접 열기",
+          "url": "https://claude.com/ko/download"
+        },
+        "permissionGuide": {
+          "title": "권한 안내 — 프로그램 설치 승인 (필요할 때 1회)",
+          "what": "Mac 비밀번호 창이나 Windows 허용(UAC) 창이 뜨면 확인을 눌러 주세요.",
+          "benefit": "승인해 주시면 복잡한 웹사이트 이동이나 설치 마법사 클릭 없이 버튼 하나로 앱 설치가 끝납니다.",
+          "safety": "미리 검증된 공식 패키지 관리자(Homebrew · winget)와 공식 다운로드 주소만 사용합니다."
+        },
+        "web": {
+          "summary": "아래 버튼을 누르면 Claude Desktop 공식 다운로드 페이지가 열려요. 받은 파일을 열어 설치해 주세요.",
+          "details": "까만 터미널 대신 화면을 보며 쓰는 앱이에요. 이미 설치되어 있으면 [설치했어요]만 누르세요.",
+          "notice": "설치할 때 Mac 비밀번호 창이나 Windows 허용 창이 뜰 수 있어요. 확인을 눌러 주세요.",
+          "buttonLabel": "Claude Desktop 공식 다운로드 페이지 열기",
+          "doneLabel": "설치했어요"
+        }
+      },
+      {
+        "id": "save-api-key",
+        "shortTitle": "2. 로그인",
+        "title": "Claude Desktop 열고 로그인하기",
+        "summary": "앱을 열고, 쓰시던 계정으로 로그인하세요. 열쇠(API 키)는 필요 없어요.",
+        "details": "Claude 계정으로 로그인하면 별도 API 키 없이 화면에서 폴더를 연결해 문서 정리·요약을 맡길 수 있습니다.",
+        "web": {
+          "summary": "설치한 앱을 열고, 쓰시던 계정으로 로그인하세요. 열쇠(API 키)는 필요 없어요.",
+          "notice": "",
+          "buttonLabel": "",
+          "doneLabel": "로그인했어요"
+        }
+      },
+      {
+        "id": "first-mission",
+        "shortTitle": "3. 첫 대화",
+        "title": "첫 대화! Claude Desktop에 물어보기",
+        "summary": "앱 창 아래 입력칸에 이렇게 물어보세요. 카드를 눌러 복사해 붙여 넣으면 돼요.",
+        "details": "[질문 복사하기]를 누른 뒤 앱 입력칸에 붙여 넣으세요. 붙여 넣기는 Mac은 Command+V, Windows는 Ctrl+V예요. 답이 마음에 안 들면 \"더 짧게\", \"더 쉽게\"라고 다시 말하면 돼요. 대화를 해 보셨으면 맨 아래 버튼으로 완료 표시를 해 주세요.",
+        "promptExamples": [
+          {
+            "category": "장보기 · 요리",
+            "text": "냉장고에 두부, 양파, 계란, 애호박이 있어. 어른 입맛에 맞는 덜 짠 저녁 반찬 2가지와 간단한 만드는 법을 알려 줘."
+          },
+          {
+            "category": "병원 · 건강 메모",
+            "text": "다음 주에 내과 정기 검진을 가. 병원 가기 전 챙길 준비물과 의사 선생님께 여쭤볼 질문 3가지를 정리해 줘."
+          },
+          {
+            "category": "가족 · 인사말",
+            "text": "오랜만에 만나는 친척 모임 단톡방에 보낼 따뜻하고 부담 없는 안부 인사말을 2가지 버전으로 써 줘."
+          },
+          {
+            "category": "날씨 · 뉴스",
+            "text": "오늘 서울 날씨에 맞는 옷차림을 알려 주고, 오늘의 주요 뉴스 3가지를 쉬운 말로 짧게 요약해 줘."
+          }
+        ],
+        "web": {
+          "summary": "앱 창 아래 입력칸에 이렇게 물어보세요. 카드를 눌러 복사해 붙여 넣으면 돼요.",
+          "notice": "",
+          "buttonLabel": "",
+          "doneLabel": "첫 대화 해 봤어요"
+        }
+      }
+    ],
+    "codex": [
+      {
+        "id": "install-agent-cli",
+        "shortTitle": "1. 앱 설치",
+        "title": "OpenAI Codex App / IDE 설치하기",
+        "summary": "AI 비서와 대화하는 앱(OpenAI Codex App / IDE)을 버튼 하나로 설치해요.",
+        "details": "까만 터미널 대신 화면을 보며 쓰는 앱입니다. 자동 설치가 안 되는 컴퓨터에서는 공식 다운로드 페이지를 대신 열어 드려요. 이미 설치되어 있으면 [상태 다시 확인]만 누르세요.",
+        "externalLink": {
+          "label": "OpenAI Codex App / IDE 공식 다운로드 페이지 직접 열기",
+          "url": "https://openai.com/codex/"
+        },
+        "permissionGuide": {
+          "title": "권한 안내 — 프로그램 설치 승인 (필요할 때 1회)",
+          "what": "Mac 비밀번호 창이나 Windows 허용(UAC) 창이 뜨면 확인을 눌러 주세요.",
+          "benefit": "승인해 주시면 복잡한 웹사이트 이동이나 설치 마법사 클릭 없이 버튼 하나로 앱 설치가 끝납니다.",
+          "safety": "미리 검증된 공식 패키지 관리자(Homebrew · winget)와 공식 다운로드 주소만 사용합니다."
+        },
+        "web": {
+          "summary": "아래 버튼을 누르면 OpenAI Codex App / IDE 공식 다운로드 페이지가 열려요. 받은 파일을 열어 설치해 주세요.",
+          "details": "까만 터미널 대신 화면을 보며 쓰는 앱이에요. 이미 설치되어 있으면 [설치했어요]만 누르세요.",
+          "notice": "설치할 때 Mac 비밀번호 창이나 Windows 허용 창이 뜰 수 있어요. 확인을 눌러 주세요.",
+          "buttonLabel": "OpenAI Codex App / IDE 공식 다운로드 페이지 열기",
+          "doneLabel": "설치했어요"
+        }
+      },
+      {
+        "id": "save-api-key",
+        "shortTitle": "2. 로그인",
+        "title": "OpenAI Codex App / IDE 열고 로그인하기",
+        "summary": "앱을 열고, 쓰시던 계정으로 로그인하세요. 열쇠(API 키)는 필요 없어요.",
+        "details": "기존 ChatGPT 계정으로 로그인하면 API 키를 따로 발급받지 않고도 화면에서 바로 작업을 맡길 수 있습니다.",
+        "web": {
+          "summary": "설치한 앱을 열고, 쓰시던 계정으로 로그인하세요. 열쇠(API 키)는 필요 없어요.",
+          "notice": "",
+          "buttonLabel": "",
+          "doneLabel": "로그인했어요"
+        }
+      },
+      {
+        "id": "first-mission",
+        "shortTitle": "3. 첫 대화",
+        "title": "첫 대화! OpenAI Codex App / IDE에 물어보기",
+        "summary": "앱 창 아래 입력칸에 이렇게 물어보세요. 카드를 눌러 복사해 붙여 넣으면 돼요.",
+        "details": "[질문 복사하기]를 누른 뒤 앱 입력칸에 붙여 넣으세요. 붙여 넣기는 Mac은 Command+V, Windows는 Ctrl+V예요. 답이 마음에 안 들면 \"더 짧게\", \"더 쉽게\"라고 다시 말하면 돼요. 대화를 해 보셨으면 맨 아래 버튼으로 완료 표시를 해 주세요.",
+        "promptExamples": [
+          {
+            "category": "장보기 · 요리",
+            "text": "냉장고에 두부, 양파, 계란, 애호박이 있어. 어른 입맛에 맞는 덜 짠 저녁 반찬 2가지와 간단한 만드는 법을 알려 줘."
+          },
+          {
+            "category": "병원 · 건강 메모",
+            "text": "다음 주에 내과 정기 검진을 가. 병원 가기 전 챙길 준비물과 의사 선생님께 여쭤볼 질문 3가지를 정리해 줘."
+          },
+          {
+            "category": "가족 · 인사말",
+            "text": "오랜만에 만나는 친척 모임 단톡방에 보낼 따뜻하고 부담 없는 안부 인사말을 2가지 버전으로 써 줘."
+          },
+          {
+            "category": "날씨 · 뉴스",
+            "text": "오늘 서울 날씨에 맞는 옷차림을 알려 주고, 오늘의 주요 뉴스 3가지를 쉬운 말로 짧게 요약해 줘."
+          }
+        ],
+        "web": {
+          "summary": "앱 창 아래 입력칸에 이렇게 물어보세요. 카드를 눌러 복사해 붙여 넣으면 돼요.",
+          "notice": "",
+          "buttonLabel": "",
+          "doneLabel": "첫 대화 해 봤어요"
+        }
+      }
+    ]
+  },
+  "lessons": [
+    {
+      "id": "notebook",
+      "order": 1,
+      "title": "AI 수첩 만들기",
+      "tag": "지침 파일",
+      "blocks": [
+        {
+          "type": "text",
+          "lines": [
+            "AI는 대화가 끝나면 다 잊어버립니다. 그래서 매번 알려 줘야 하는 내용(나를 부르는 호칭, 가족, 자주 하는 일, 꼭 지켜 줄 규칙)은 AI 수첩에 한 번만 적어 둡니다.",
+            "AI 수첩은 AI가 대화를 시작할 때마다 먼저 읽는 메모, 곧 지침 파일입니다.",
+            "AI 비서마다 읽는 파일 이름이 달라요. Codex는 AGENTS.md, Claude는 CLAUDE.md, Gemini는 GEMINI.md를 읽습니다. 이 앱은 공통 수첩 AGENTS.md를 만들고, 내 비서의 파일에서 수첩을 읽도록 이어 줍니다."
+          ]
+        },
+        {
+          "type": "agentNote",
+          "label": "내 AI 비서는",
+          "texts": {
+            "gemini": "Gemini는 GEMINI.md를 읽어요. 버튼을 누르면 GEMINI.md 끝에 \"AGENTS.md(수첩)를 먼저 읽어 주세요\" 안내를 붙입니다.",
+            "codex": "Codex는 AGENTS.md를 바로 읽어요. 수첩이 곧 Codex의 지침 파일이라 따로 연결할 필요가 없습니다.",
+            "claude": "Claude는 CLAUDE.md를 읽어요. 버튼을 누르면 CLAUDE.md 끝에 @AGENTS.md 연결 줄을 붙여 수첩을 함께 읽게 합니다.",
+            "ollama": "Ollama는 파일을 스스로 읽지 않아요. AI-규칙.txt에 안내를 붙여 두지만, 대화 처음에 수첩 내용을 복사해 붙여 넣어 주세요."
+          }
+        }
+      ],
+      "action": {
+        "lessonId": "notebook",
+        "label": "AI 수첩 만들기",
+        "openLabel": "수첩 열기"
+      }
+    },
+    {
+      "id": "session",
+      "order": 2,
+      "title": "대화방은 공책 한 권",
+      "tag": "세션",
+      "blocks": [
+        {
+          "type": "text",
+          "lines": [
+            "새 대화(세션)를 열면 새 공책을 펴는 것과 같습니다. 앞 공책에 쓴 내용은 모르기 때문에 \"어제 말했잖아\"는 통하지 않아요.",
+            "한 공책에 너무 많이 쓰면 AI가 앞 내용을 헷갈리고 대답도 느려집니다.",
+            "꼭 기억해야 할 내용은 공책이 아니라 AI 수첩에 적어 두세요."
+          ]
+        },
+        {
+          "type": "checklist",
+          "title": "새 대화를 열 때 점검표",
+          "items": [
+            "하던 일이 끝났다 → 새 대화",
+            "주제가 바뀌었다 → 새 대화",
+            "AI가 엉뚱한 말을 하거나 같은 실수를 되풀이한다 → 새 대화",
+            "꼭 기억할 내용은 수첩에 적었다"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "usage",
+      "order": 3,
+      "title": "사용량은 데이터 요금처럼",
+      "tag": "토큰 · 사용 한도",
+      "blocks": [
+        {
+          "type": "text",
+          "lines": [
+            "AI가 읽고 쓰는 글자 양은 토큰이라는 단위로 셉니다. 휴대폰 데이터 요금처럼 쓴 만큼 줄어들어요.",
+            "AI는 대답할 때마다 공책 전체(컨텍스트)를 처음부터 다시 읽습니다. 그래서 대화가 길어질수록 질문 한 번에 쓰는 양이 커집니다.",
+            "사용 한도를 다 쓰면 잠시 멈추고, 몇 시간이 지나면 다시 찹니다.",
+            "내 컴퓨터에서 돌리는 Ollama는 한도가 없지만, 느리고 덜 똑똑합니다."
+          ]
+        },
+        {
+          "type": "usage",
+          "note": "예시 그림입니다. 실제 한도는 요금제마다 다릅니다."
+        },
+        {
+          "type": "cards",
+          "title": "사용량을 아끼는 습관 5가지",
+          "items": [
+            {
+              "title": "일 하나 끝나면 새 대화",
+              "text": "공책이 짧을수록 한 번에 읽는 양이 적어요."
+            },
+            {
+              "title": "부탁은 짧고 구체적으로",
+              "text": "\"이 문자 좀 봐 줘\"보다 \"이 문자에서 병원 예약 날짜와 시간만 알려 줘\"라고 하면, AI가 헤매지 않아 답이 짧고 빨라요."
+            },
+            {
+              "title": "필요한 파일만 보여 주기",
+              "text": "폴더 전체 대신 꼭 필요한 파일 하나만 알려 주세요."
+            },
+            {
+              "title": "늘 하는 말은 수첩에 한 번만",
+              "text": "호칭·규칙을 매번 말하지 않아도 됩니다."
+            },
+            {
+              "title": "간단한 일은 가벼운 모델로",
+              "text": "글 다듬기·정리는 작은 모델로 충분해요."
+            }
+          ]
+        },
+        {
+          "type": "callout",
+          "title": "실제 사용 예: AI로 앱을 만드는 사람은 이런 규칙을 수첩에 적어 둡니다",
+          "items": [
+            "큰 파일은 통째로 읽지 말고 필요한 부분만 찾아 읽기",
+            "일 단위가 끝나면 대화를 끊고, 이어 갈 내용은 메모 파일에 남기기",
+            "어려운 판단은 큰 모델, 단순 반복은 작은 모델"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "model",
+      "order": 4,
+      "title": "전문가와 도우미",
+      "tag": "모델 고르기",
+      "blocks": [
+        {
+          "type": "text",
+          "lines": [
+            "같은 AI 앱 안에도 큰 모델(전문가)과 작은 모델(도우미)이 있습니다.",
+            "큰 모델은 계획 세우기, 문제의 원인 찾기처럼 머리를 많이 써야 하는 일에 씁니다. 사용량을 많이 씁니다.",
+            "작은 모델은 글 다듬기, 정리, 같은 일 되풀이하기에 씁니다. 빠르고 사용량이 적습니다.",
+            "모델 이름은 자주 바뀌니 외우지 마세요. \"앱에서 모델 고르는 곳\"만 기억하면 됩니다."
+          ]
+        },
+        {
+          "type": "agentNote",
+          "label": "모델 고르는 곳",
+          "texts": {
+            "gemini": "앱 화면 위쪽이나 아래쪽(입력창 근처)의 모델 이름을 눌러 보세요. 어려운 일은 큰 모델, 간단한 일은 가벼운 모델을 고릅니다.",
+            "codex": "앱에서는 입력창 근처의 모델 이름을 눌러 보세요. 명령창(CLI)에서는 /model 이라고 입력하면 고를 수 있어요.",
+            "claude": "앱에서는 입력창 근처의 모델 이름을 눌러 보세요. 명령창(CLI)에서는 /model 이라고 입력하면 고를 수 있어요.",
+            "ollama": "작은 모델만 쓰고 있어요. 한도 걱정 없음! 대신 어려운 일은 느리거나 틀릴 수 있어요."
+          }
+        }
+      ]
+    },
+    {
+      "id": "handoff",
+      "order": 5,
+      "title": "긴 일은 나눠서",
+      "tag": "다음에 할 일 메모",
+      "blocks": [
+        {
+          "type": "text",
+          "lines": [
+            "긴 일을 한 대화에서 끝까지 하면 사용량도 많이 쓰고 AI도 헷갈립니다.",
+            "중간에 \"다음에 할 일\" 메모를 남기고, 새 대화에서 메모를 읽혀 이어 가세요.",
+            "아래 두 질문을 복사해서 대화 끝과 새 대화 처음에 붙여 넣으면 됩니다."
+          ]
+        },
+        {
+          "type": "prompts",
+          "items": [
+            {
+              "category": "대화를 마무리할 때",
+              "text": "지금까지 한 일, 아직 남은 일, 다음에 할 첫 번째 일을 다음에-할-일.md 파일에 정리해 줘."
+            },
+            {
+              "category": "새 대화에서 이어 갈 때",
+              "text": "다음에-할-일.md를 읽고 첫 번째 일부터 이어서 해 줘."
+            }
+          ]
+        }
+      ],
+      "action": {
+        "lessonId": "handoff",
+        "label": "메모 파일 준비하기",
+        "openLabel": "메모 열기"
+      }
+    },
+    {
+      "id": "plugins",
+      "order": 6,
+      "title": "맛보기: 연결 도구와 요리법 카드",
+      "tag": "MCP · 스킬",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "연결 도구 (MCP): AI에 꽂는 플러그"
+        },
+        {
+          "type": "text",
+          "lines": [
+            "MCP는 AI에 꽂는 플러그입니다. 달력·메일 같은 다른 서비스를 AI가 직접 쓰게 해 줍니다.",
+            "요즘 AI는 플러그 없이도 많은 일을 하므로, 꼭 필요할 때만 쓰세요. 켜는 곳은 앱의 설정 → 연결 메뉴입니다."
+          ]
+        },
+        {
+          "type": "callout",
+          "title": "플러그 안전 수칙 3가지",
+          "items": [
+            "공식 앱 화면의 \"연결\" 메뉴로만 켭니다.",
+            "은행·결제 계정은 연결하지 않습니다.",
+            "모르는 사람이 알려 준 설정 파일은 붙여 넣지 않습니다."
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "요리법 카드 (스킬): 자주 하는 일의 순서"
+        },
+        {
+          "type": "text",
+          "lines": [
+            "스킬은 자주 하는 일의 순서를 카드에 적어 두고 \"이 카드대로 해 줘\"라고 부탁하는 것입니다.",
+            "시작해보기 탭의 레시피와 같은 생각이에요. 버튼을 누르면 작업 폴더에 예시 카드 하나를 만들어 드립니다."
+          ]
+        },
+        {
+          "type": "prompts",
+          "items": [
+            {
+              "category": "카드대로 부탁하기",
+              "text": "요리법-카드/아침-브리핑-순서.md 대로 해 줘."
+            }
+          ]
+        }
+      ],
+      "action": {
+        "lessonId": "skill-card",
+        "label": "요리법 카드 만들어 보기",
+        "openLabel": "카드 열기"
+      }
+    }
+  ],
+  "app": {
+    "downloadPageUrl": "https://github.com/aigo-studio/aigo-release/releases/latest",
+    "version": "0.1.0"
+  }
+}
