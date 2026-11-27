@@ -174,7 +174,7 @@
   // --- 1부 화면 ---
   function renderAgentBar() {
     const agent = agentById(state.agentId);
-    el.agentSummary.textContent = agent ? `${agent.name} (${agent.guiAppName})` : '아직 고르지 않았어요';
+    el.agentSummary.textContent = agent ? agent.name : '아직 고르지 않았어요';
   }
 
   function renderSidebar() {
@@ -233,7 +233,8 @@
     const web = step.web || {};
     const done = isDone(step.id);
 
-    el.mobileNotice.classList.toggle('hidden', !(state.stepIndex === 0 && MOBILE_QUERY.matches));
+    // 앱 설치 단계만 컴퓨터가 필요하다 (웹에서 열기 · 첫 질문은 휴대폰에서도 된다)
+    el.mobileNotice.classList.toggle('hidden', !(web.gotoTab === 'app' && MOBILE_QUERY.matches));
 
     el.stepNumber.textContent = `${state.stepIndex + 1}단계 / ${list.length}단계`;
     el.statusBadge.textContent = done ? '완료됨' : '아직 안 함';
@@ -253,8 +254,20 @@
     renderPrompts(step.promptExamples);
 
     const url = step.externalLink && step.externalLink.url;
-    if (web.buttonLabel && url && url.startsWith('https://')) {
+    const gotoTab = web.gotoTab && el.views[web.gotoTab] ? web.gotoTab : '';
+    delete el.linkBtn.dataset.goto;
+    delete el.linkBtn.dataset.track;
+    if (web.buttonLabel && gotoTab) {
+      // 이 페이지 안의 다른 탭으로 보낸다 (새 창 아님)
+      el.linkBtn.href = `#${gotoTab}`;
+      el.linkBtn.removeAttribute('target');
+      el.linkBtn.dataset.goto = gotoTab;
+      el.linkBtn.textContent = web.buttonLabel;
+      el.linkBtn.classList.remove('hidden');
+    } else if (web.buttonLabel && url && url.startsWith('https://')) {
       el.linkBtn.href = url;
+      el.linkBtn.target = '_blank';
+      el.linkBtn.dataset.track = `web/open/${state.agentId}`;
       el.linkBtn.textContent = web.buttonLabel;
       el.linkBtn.classList.remove('hidden');
     } else {
@@ -704,6 +717,16 @@
     });
     el.changeAgentBtn.addEventListener('click', () => Welcome.open('agent'));
     el.doneBtn.addEventListener('click', onDoneClick);
+    el.linkBtn.addEventListener('click', (e) => {
+      const goto = el.linkBtn.dataset.goto;
+      if (goto) {
+        e.preventDefault();
+        showTab(goto);
+        return;
+      }
+      const label = el.linkBtn.dataset.track;
+      if (label) trackEvent(label);
+    });
     el.prevBtn.addEventListener('click', () => goToStep(state.stepIndex - 1));
     el.nextBtn.addEventListener('click', () => goToStep(state.stepIndex + 1));
     el.nextCardCloseBtn.addEventListener('click', () => {
