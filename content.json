@@ -55,14 +55,14 @@
         "id": "web-open",
         "shortTitle": "1. 웹에서 열기",
         "title": "Gemini 웹 화면 열고 로그인하기",
-        "summary": "설치 없이 인터넷 창에서 바로 Gemini를 써 봐요. 아래 버튼을 누르면 새 창이 열려요.",
-        "details": "새 창에 [로그인] 버튼이 보이면 눌러서 구글(Gmail) 계정으로 들어가세요. 이미 로그인되어 있으면 바로 대화 화면이 나와요. 다 됐으면 이 창으로 돌아와 [열었어요]를 누르세요.",
+        "summary": "설치 없이 인터넷 창에서 바로 Gemini를 써 봐요. 아래 버튼을 누르면 Gemini 화면이 따로 새 창으로 열려요.",
+        "details": "새 창에 [로그인] 버튼이 보이면 눌러서 쓰시던 계정으로 들어가세요. 이미 로그인되어 있으면 바로 대화 화면이 나와요. 새 창은 닫지 말고 두세요. 다음 단계에서 이 안내 창과 번갈아 쓰게 돼요.",
         "externalLink": {
           "label": "Gemini 웹 화면 열기",
           "url": "https://gemini.google.com/"
         },
         "web": {
-          "notice": "휴대폰에서도 돼요. 이 단계와 다음 단계는 어디서든 해 볼 수 있어요.",
+          "notice": "이 안내 창은 그대로 두고, Gemini 창을 옆에 따로 띄워 쓰는 거예요. 두 창을 번갈아 누르며 따라 하시면 돼요.",
           "buttonLabel": "Gemini 웹 화면 열기 (새 창)",
           "doneLabel": "열었어요"
         }
@@ -71,8 +71,8 @@
         "id": "first-question",
         "shortTitle": "2. 첫 질문",
         "title": "첫 질문! Gemini에 물어보기",
-        "summary": "아래 카드 중 하나를 골라 [질문 복사하기]를 누르고, Gemini 화면 아래 입력칸에 붙여 넣어 보세요.",
-        "details": "붙여 넣기는 Mac은 Command+V, Windows는 Ctrl+V, 휴대폰은 입력칸을 길게 누르고 [붙여넣기]예요. 답이 마음에 안 들면 \"더 짧게\", \"더 쉽게\"라고 다시 말하면 돼요. 대화를 해 보셨으면 맨 아래 버튼으로 완료 표시를 해 주세요.",
+        "summary": "① 아래 카드에서 [질문 복사하기]를 누르고 → ② 옆의 Gemini 창 입력칸을 한 번 누른 뒤 → ③ 붙여 넣으세요.",
+        "details": "붙여 넣기는 Mac은 Command+V, Windows는 Ctrl+V, 휴대폰은 입력칸을 길게 누르고 [붙여넣기]예요. Gemini 창이 안 보이면 Windows는 Alt+Tab, Mac은 Command+`(숫자 1 왼쪽 키)로 창을 바꿀 수 있어요. 창을 닫았다면 아래 [Gemini 창 다시 열기]를 누르세요. 답이 마음에 안 들면 \"더 짧게\", \"더 쉽게\"라고 다시 말하면 돼요. 대화를 해 보셨으면 맨 아래 버튼으로 완료 표시를 해 주세요.",
         "promptExamples": [
           {
             "category": "장보기 · 요리",
@@ -93,7 +93,12 @@
         ],
         "web": {
           "notice": "",
-          "doneLabel": "첫 질문 해 봤어요"
+          "doneLabel": "첫 질문 해 봤어요",
+          "reopenLabel": "Gemini 창 다시 열기"
+        },
+        "externalLink": {
+          "label": "Gemini 웹 화면 열기",
+          "url": "https://gemini.google.com/"
         }
       },
       {
@@ -115,14 +120,14 @@
         "id": "web-open",
         "shortTitle": "1. 웹에서 열기",
         "title": "Claude 웹 화면 열고 로그인하기",
-        "summary": "설치 없이 인터넷 창에서 바로 Claude를 써 봐요. 아래 버튼을 누르면 새 창이 열려요.",
-        "details": "새 창에 [로그인] 버튼이 보이면 눌러서 Claude 계정 (구글 계정으로도 만들 수 있어요)으로 들어가세요. 이미 로그인되어 있으면 바로 대화 화면이 나와요. 다 됐으면 이 창으로 돌아와 [열었어요]를 누르세요.",
+        "summary": "설치 없이 인터넷 창에서 바로 Claude를 써 봐요. 아래 버튼을 누르면 Claude 화면이 따로 새 창으로 열려요.",
+        "details": "새 창에 [로그인] 버튼이 보이면 눌러서 쓰시던 계정으로 들어가세요. 이미 로그인되어 있으면 바로 대화 화면이 나와요. 새 창은 닫지 말고 두세요. 다음 단계에서 이 안내 창과 번갈아 쓰게 돼요.",
         "externalLink": {
           "label": "Claude 웹 화면 열기",
           "url": "https://claude.ai/"
         },
         "web": {
-          "notice": "휴대폰에서도 돼요. 이 단계와 다음 단계는 어디서든 해 볼 수 있어요.",
+          "notice": "이 안내 창은 그대로 두고, Claude 창을 옆에 따로 띄워 쓰는 거예요. 두 창을 번갈아 누르며 따라 하시면 돼요.",
           "buttonLabel": "Claude 웹 화면 열기 (새 창)",
           "doneLabel": "열었어요"
         }
@@ -131,8 +136,8 @@
         "id": "first-question",
         "shortTitle": "2. 첫 질문",
         "title": "첫 질문! Claude에 물어보기",
-        "summary": "아래 카드 중 하나를 골라 [질문 복사하기]를 누르고, Claude 화면 아래 입력칸에 붙여 넣어 보세요.",
-        "details": "붙여 넣기는 Mac은 Command+V, Windows는 Ctrl+V, 휴대폰은 입력칸을 길게 누르고 [붙여넣기]예요. 답이 마음에 안 들면 \"더 짧게\", \"더 쉽게\"라고 다시 말하면 돼요. 대화를 해 보셨으면 맨 아래 버튼으로 완료 표시를 해 주세요.",
+        "summary": "① 아래 카드에서 [질문 복사하기]를 누르고 → ② 옆의 Claude 창 입력칸을 한 번 누른 뒤 → ③ 붙여 넣으세요.",
+        "details": "붙여 넣기는 Mac은 Command+V, Windows는 Ctrl+V, 휴대폰은 입력칸을 길게 누르고 [붙여넣기]예요. Claude 창이 안 보이면 Windows는 Alt+Tab, Mac은 Command+`(숫자 1 왼쪽 키)로 창을 바꿀 수 있어요. 창을 닫았다면 아래 [Claude 창 다시 열기]를 누르세요. 답이 마음에 안 들면 \"더 짧게\", \"더 쉽게\"라고 다시 말하면 돼요. 대화를 해 보셨으면 맨 아래 버튼으로 완료 표시를 해 주세요.",
         "promptExamples": [
           {
             "category": "장보기 · 요리",
@@ -153,7 +158,12 @@
         ],
         "web": {
           "notice": "",
-          "doneLabel": "첫 질문 해 봤어요"
+          "doneLabel": "첫 질문 해 봤어요",
+          "reopenLabel": "Claude 창 다시 열기"
+        },
+        "externalLink": {
+          "label": "Claude 웹 화면 열기",
+          "url": "https://claude.ai/"
         }
       },
       {
@@ -175,14 +185,14 @@
         "id": "web-open",
         "shortTitle": "1. 웹에서 열기",
         "title": "ChatGPT 웹 화면 열고 로그인하기",
-        "summary": "설치 없이 인터넷 창에서 바로 ChatGPT를 써 봐요. 아래 버튼을 누르면 새 창이 열려요.",
-        "details": "새 창에 [로그인] 버튼이 보이면 눌러서 ChatGPT 계정으로 들어가세요. 이미 로그인되어 있으면 바로 대화 화면이 나와요. 다 됐으면 이 창으로 돌아와 [열었어요]를 누르세요.",
+        "summary": "설치 없이 인터넷 창에서 바로 ChatGPT를 써 봐요. 아래 버튼을 누르면 ChatGPT 화면이 따로 새 창으로 열려요.",
+        "details": "새 창에 [로그인] 버튼이 보이면 눌러서 쓰시던 계정으로 들어가세요. 이미 로그인되어 있으면 바로 대화 화면이 나와요. 새 창은 닫지 말고 두세요. 다음 단계에서 이 안내 창과 번갈아 쓰게 돼요.",
         "externalLink": {
           "label": "ChatGPT 웹 화면 열기",
           "url": "https://chatgpt.com/"
         },
         "web": {
-          "notice": "휴대폰에서도 돼요. 이 단계와 다음 단계는 어디서든 해 볼 수 있어요.",
+          "notice": "이 안내 창은 그대로 두고, ChatGPT 창을 옆에 따로 띄워 쓰는 거예요. 두 창을 번갈아 누르며 따라 하시면 돼요.",
           "buttonLabel": "ChatGPT 웹 화면 열기 (새 창)",
           "doneLabel": "열었어요"
         }
@@ -191,8 +201,8 @@
         "id": "first-question",
         "shortTitle": "2. 첫 질문",
         "title": "첫 질문! ChatGPT에 물어보기",
-        "summary": "아래 카드 중 하나를 골라 [질문 복사하기]를 누르고, ChatGPT 화면 아래 입력칸에 붙여 넣어 보세요.",
-        "details": "붙여 넣기는 Mac은 Command+V, Windows는 Ctrl+V, 휴대폰은 입력칸을 길게 누르고 [붙여넣기]예요. 답이 마음에 안 들면 \"더 짧게\", \"더 쉽게\"라고 다시 말하면 돼요. 대화를 해 보셨으면 맨 아래 버튼으로 완료 표시를 해 주세요.",
+        "summary": "① 아래 카드에서 [질문 복사하기]를 누르고 → ② 옆의 ChatGPT 창 입력칸을 한 번 누른 뒤 → ③ 붙여 넣으세요.",
+        "details": "붙여 넣기는 Mac은 Command+V, Windows는 Ctrl+V, 휴대폰은 입력칸을 길게 누르고 [붙여넣기]예요. ChatGPT 창이 안 보이면 Windows는 Alt+Tab, Mac은 Command+`(숫자 1 왼쪽 키)로 창을 바꿀 수 있어요. 창을 닫았다면 아래 [ChatGPT 창 다시 열기]를 누르세요. 답이 마음에 안 들면 \"더 짧게\", \"더 쉽게\"라고 다시 말하면 돼요. 대화를 해 보셨으면 맨 아래 버튼으로 완료 표시를 해 주세요.",
         "promptExamples": [
           {
             "category": "장보기 · 요리",
@@ -213,7 +223,12 @@
         ],
         "web": {
           "notice": "",
-          "doneLabel": "첫 질문 해 봤어요"
+          "doneLabel": "첫 질문 해 봤어요",
+          "reopenLabel": "ChatGPT 창 다시 열기"
+        },
+        "externalLink": {
+          "label": "ChatGPT 웹 화면 열기",
+          "url": "https://chatgpt.com/"
         }
       },
       {
