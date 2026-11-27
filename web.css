@@ -206,6 +206,23 @@ a.btn {
   font-size: 18px;
 }
 
+.web-install-sub {
+  margin: 10px 0 4px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.web-install-note {
+  margin: 6px 0 0;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.web-install-guide ol + .web-install-sub {
+  margin-top: 12px;
+}
+
 .web-install-guide ol {
   margin: 0;
   padding-left: 22px;
