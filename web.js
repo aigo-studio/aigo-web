@@ -51,6 +51,7 @@
     stepNotice: $('step-notice'),
     prompts: $('prompt-examples-wrap'),
     linkBtn: $('external-link-btn'),
+    reopenBtn: $('reopen-link-btn'),
     doneBtn: $('done-btn'),
     prevBtn: $('prev-btn'),
     nextBtn: $('next-btn'),
@@ -219,7 +220,7 @@
       btn.type = 'button';
       btn.className = 'prompt-copy-btn';
       btn.textContent = '질문 복사하기';
-      btn.addEventListener('click', () => copyText(btn, item.text, '질문 복사하기'));
+      btn.addEventListener('click', () => copyText(btn, item.text, '질문 복사하기', '복사 완료! AI 창에 붙여 넣으세요'));
       card.append(cat, text, btn);
       el.prompts.appendChild(card);
     });
@@ -273,6 +274,15 @@
     } else {
       el.linkBtn.removeAttribute('href');
       el.linkBtn.classList.add('hidden');
+    }
+
+    if (web.reopenLabel && url && url.startsWith('https://')) {
+      el.reopenBtn.href = url;
+      el.reopenBtn.textContent = web.reopenLabel;
+      el.reopenBtn.classList.remove('hidden');
+    } else {
+      el.reopenBtn.removeAttribute('href');
+      el.reopenBtn.classList.add('hidden');
     }
 
     const doneLabel = web.doneLabel || '했어요';
@@ -705,6 +715,25 @@
     if (computer === 'windows') guides.insertBefore($('guide-windows'), $('guide-mac'));
   }
 
+  // --- AI 웹 화면은 안내 창 옆에 따로 새 창으로 띄운다 (탭이 아니라 창이라 Alt+Tab으로 오갈 수 있다) ---
+  function openAiWindow(e, url) {
+    if (!url || !url.startsWith('https://')) return;
+    if (MOBILE_QUERY.matches || detectComputer() === 'phone') return; // 휴대폰은 보통 링크(새 탭)로 둔다
+    const sw = window.screen.availWidth || 1280;
+    const sh = window.screen.availHeight || 800;
+    const width = Math.min(sw, Math.max(480, Math.round(sw * 0.45)));
+    const left = (window.screen.availLeft || 0) + sw - width;
+    const top = window.screen.availTop || 0;
+    const w = window.open(url, '_blank', `popup=yes,width=${width},height=${sh},left=${left},top=${top}`);
+    if (!w) return; // 창이 막혔으면 보통 링크(새 탭)로 연다
+    e.preventDefault();
+    try {
+      w.opener = null;
+    } catch {
+      // 다른 사이트 창이면 못 바꿀 수 있다
+    }
+  }
+
   // --- 시작 ---
   function bindEvents() {
     el.tabs.addEventListener('click', (e) => {
@@ -726,6 +755,11 @@
       }
       const label = el.linkBtn.dataset.track;
       if (label) trackEvent(label);
+      openAiWindow(e, el.linkBtn.href);
+    });
+    el.reopenBtn.addEventListener('click', (e) => {
+      trackEvent(`web/reopen/${state.agentId}`);
+      openAiWindow(e, el.reopenBtn.href);
     });
     el.prevBtn.addEventListener('click', () => goToStep(state.stepIndex - 1));
     el.nextBtn.addEventListener('click', () => goToStep(state.stepIndex + 1));
