@@ -52,48 +52,27 @@
   "steps": {
     "gemini": [
       {
-        "id": "install-agent-cli",
-        "shortTitle": "1. 앱 설치",
-        "title": "Gemini 데스크톱 앱 설치하기",
-        "summary": "AI 비서와 대화하는 앱(Gemini 데스크톱 앱)을 버튼 하나로 설치해요.",
-        "details": "까만 터미널 대신 화면을 보며 쓰는 앱입니다. 자동 설치가 안 되는 컴퓨터에서는 공식 다운로드 페이지를 대신 열어 드려요. 이미 설치되어 있으면 [상태 다시 확인]만 누르세요.",
+        "id": "web-open",
+        "shortTitle": "1. 웹에서 열기",
+        "title": "Gemini 웹 화면 열고 로그인하기",
+        "summary": "설치 없이 인터넷 창에서 바로 Gemini를 써 봐요. 아래 버튼을 누르면 새 창이 열려요.",
+        "details": "새 창에 [로그인] 버튼이 보이면 눌러서 구글(Gmail) 계정으로 들어가세요. 이미 로그인되어 있으면 바로 대화 화면이 나와요. 다 됐으면 이 창으로 돌아와 [열었어요]를 누르세요.",
         "externalLink": {
-          "label": "Gemini 데스크톱 앱 공식 다운로드 페이지 직접 열기",
-          "url": "https://gemini.google/desktop/"
-        },
-        "permissionGuide": {
-          "title": "권한 안내 — 프로그램 설치 승인 (필요할 때 1회)",
-          "what": "Mac 비밀번호 창이나 Windows 허용(UAC) 창이 뜨면 확인을 눌러 주세요.",
-          "benefit": "승인해 주시면 복잡한 웹사이트 이동이나 설치 마법사 클릭 없이 버튼 하나로 앱 설치가 끝납니다.",
-          "safety": "미리 검증된 공식 패키지 관리자(Homebrew · winget)와 공식 다운로드 주소만 사용합니다."
+          "label": "Gemini 웹 화면 열기",
+          "url": "https://gemini.google.com/"
         },
         "web": {
-          "summary": "아래 버튼을 누르면 Gemini 데스크톱 앱 공식 다운로드 페이지가 열려요. 받은 파일을 열어 설치해 주세요.",
-          "details": "까만 터미널 대신 화면을 보며 쓰는 앱이에요. 이미 설치되어 있으면 [설치했어요]만 누르세요.",
-          "notice": "설치할 때 Mac 비밀번호 창이나 Windows 허용 창이 뜰 수 있어요. 확인을 눌러 주세요.",
-          "buttonLabel": "Gemini 데스크톱 앱 공식 다운로드 페이지 열기",
-          "doneLabel": "설치했어요"
+          "notice": "휴대폰에서도 돼요. 이 단계와 다음 단계는 어디서든 해 볼 수 있어요.",
+          "buttonLabel": "Gemini 웹 화면 열기 (새 창)",
+          "doneLabel": "열었어요"
         }
       },
       {
-        "id": "save-api-key",
-        "shortTitle": "2. 로그인",
-        "title": "Gemini 데스크톱 앱 열고 로그인하기",
-        "summary": "앱을 열고, 쓰시던 계정으로 로그인하세요. 열쇠(API 키)는 필요 없어요.",
-        "details": "복잡한 API 키 없이 평소 쓰시는 개인 Google 계정(Gmail)으로 로그인하면 바로 시작할 수 있으며, 익숙해지면 앱 안에서 원클릭으로 Google Antigravity를 열 수 있습니다.",
-        "web": {
-          "summary": "설치한 앱을 열고, 쓰시던 계정으로 로그인하세요. 열쇠(API 키)는 필요 없어요.",
-          "notice": "",
-          "buttonLabel": "",
-          "doneLabel": "로그인했어요"
-        }
-      },
-      {
-        "id": "first-mission",
-        "shortTitle": "3. 첫 대화",
-        "title": "첫 대화! Gemini 데스크톱 앱에 물어보기",
-        "summary": "앱 창 아래 입력칸에 이렇게 물어보세요. 카드를 눌러 복사해 붙여 넣으면 돼요.",
-        "details": "[질문 복사하기]를 누른 뒤 앱 입력칸에 붙여 넣으세요. 붙여 넣기는 Mac은 Command+V, Windows는 Ctrl+V예요. 답이 마음에 안 들면 \"더 짧게\", \"더 쉽게\"라고 다시 말하면 돼요. 대화를 해 보셨으면 맨 아래 버튼으로 완료 표시를 해 주세요.",
+        "id": "first-question",
+        "shortTitle": "2. 첫 질문",
+        "title": "첫 질문! Gemini에 물어보기",
+        "summary": "아래 카드 중 하나를 골라 [질문 복사하기]를 누르고, Gemini 화면 아래 입력칸에 붙여 넣어 보세요.",
+        "details": "붙여 넣기는 Mac은 Command+V, Windows는 Ctrl+V, 휴대폰은 입력칸을 길게 누르고 [붙여넣기]예요. 답이 마음에 안 들면 \"더 짧게\", \"더 쉽게\"라고 다시 말하면 돼요. 대화를 해 보셨으면 맨 아래 버튼으로 완료 표시를 해 주세요.",
         "promptExamples": [
           {
             "category": "장보기 · 요리",
@@ -113,57 +92,47 @@
           }
         ],
         "web": {
-          "summary": "앱 창 아래 입력칸에 이렇게 물어보세요. 카드를 눌러 복사해 붙여 넣으면 돼요.",
           "notice": "",
-          "buttonLabel": "",
-          "doneLabel": "첫 대화 해 봤어요"
+          "doneLabel": "첫 질문 해 봤어요"
+        }
+      },
+      {
+        "id": "install-aigo",
+        "shortTitle": "3. 앱 설치",
+        "title": "더 편하게 쓰려면 에이아이고 앱 설치하기",
+        "summary": "AI와 대화해 보셨나요? 컴퓨터에 에이아이고 앱을 깔면 AI 비서 앱 설치부터 매일 쓰는 설정까지 버튼 하나로 해 드려요.",
+        "details": "에이아이고 앱이 해 드리는 일: AI 비서 데스크톱 앱 설치와 로그인 안내, 작업 폴더와 말투 규칙(AI 수첩) 자동 만들기, 복용약 체크표·식단표 같은 생활 자동화 레시피, 휴대폰 텔레그램으로 알림 받기. Mac · Windows 컴퓨터용이에요.",
+        "web": {
+          "notice": "처음 한 번은 컴퓨터가 \"확인되지 않은 앱\"이라며 막아요. 앱 받기 화면에 여는 법을 그림 순서대로 적어 두었어요.",
+          "gotoTab": "app",
+          "buttonLabel": "에이아이고 앱 받으러 가기",
+          "doneLabel": "설치했어요"
         }
       }
     ],
     "claude": [
       {
-        "id": "install-agent-cli",
-        "shortTitle": "1. 앱 설치",
-        "title": "Claude Desktop 설치하기",
-        "summary": "AI 비서와 대화하는 앱(Claude Desktop)을 버튼 하나로 설치해요.",
-        "details": "까만 터미널 대신 화면을 보며 쓰는 앱입니다. 자동 설치가 안 되는 컴퓨터에서는 공식 다운로드 페이지를 대신 열어 드려요. 이미 설치되어 있으면 [상태 다시 확인]만 누르세요.",
+        "id": "web-open",
+        "shortTitle": "1. 웹에서 열기",
+        "title": "Claude 웹 화면 열고 로그인하기",
+        "summary": "설치 없이 인터넷 창에서 바로 Claude를 써 봐요. 아래 버튼을 누르면 새 창이 열려요.",
+        "details": "새 창에 [로그인] 버튼이 보이면 눌러서 Claude 계정 (구글 계정으로도 만들 수 있어요)으로 들어가세요. 이미 로그인되어 있으면 바로 대화 화면이 나와요. 다 됐으면 이 창으로 돌아와 [열었어요]를 누르세요.",
         "externalLink": {
-          "label": "Claude Desktop 공식 다운로드 페이지 직접 열기",
-          "url": "https://claude.com/ko/download"
-        },
-        "permissionGuide": {
-          "title": "권한 안내 — 프로그램 설치 승인 (필요할 때 1회)",
-          "what": "Mac 비밀번호 창이나 Windows 허용(UAC) 창이 뜨면 확인을 눌러 주세요.",
-          "benefit": "승인해 주시면 복잡한 웹사이트 이동이나 설치 마법사 클릭 없이 버튼 하나로 앱 설치가 끝납니다.",
-          "safety": "미리 검증된 공식 패키지 관리자(Homebrew · winget)와 공식 다운로드 주소만 사용합니다."
+          "label": "Claude 웹 화면 열기",
+          "url": "https://claude.ai/"
         },
         "web": {
-          "summary": "아래 버튼을 누르면 Claude Desktop 공식 다운로드 페이지가 열려요. 받은 파일을 열어 설치해 주세요.",
-          "details": "까만 터미널 대신 화면을 보며 쓰는 앱이에요. 이미 설치되어 있으면 [설치했어요]만 누르세요.",
-          "notice": "설치할 때 Mac 비밀번호 창이나 Windows 허용 창이 뜰 수 있어요. 확인을 눌러 주세요.",
-          "buttonLabel": "Claude Desktop 공식 다운로드 페이지 열기",
-          "doneLabel": "설치했어요"
+          "notice": "휴대폰에서도 돼요. 이 단계와 다음 단계는 어디서든 해 볼 수 있어요.",
+          "buttonLabel": "Claude 웹 화면 열기 (새 창)",
+          "doneLabel": "열었어요"
         }
       },
       {
-        "id": "save-api-key",
-        "shortTitle": "2. 로그인",
-        "title": "Claude Desktop 열고 로그인하기",
-        "summary": "앱을 열고, 쓰시던 계정으로 로그인하세요. 열쇠(API 키)는 필요 없어요.",
-        "details": "Claude 계정으로 로그인하면 별도 API 키 없이 화면에서 폴더를 연결해 문서 정리·요약을 맡길 수 있습니다.",
-        "web": {
-          "summary": "설치한 앱을 열고, 쓰시던 계정으로 로그인하세요. 열쇠(API 키)는 필요 없어요.",
-          "notice": "",
-          "buttonLabel": "",
-          "doneLabel": "로그인했어요"
-        }
-      },
-      {
-        "id": "first-mission",
-        "shortTitle": "3. 첫 대화",
-        "title": "첫 대화! Claude Desktop에 물어보기",
-        "summary": "앱 창 아래 입력칸에 이렇게 물어보세요. 카드를 눌러 복사해 붙여 넣으면 돼요.",
-        "details": "[질문 복사하기]를 누른 뒤 앱 입력칸에 붙여 넣으세요. 붙여 넣기는 Mac은 Command+V, Windows는 Ctrl+V예요. 답이 마음에 안 들면 \"더 짧게\", \"더 쉽게\"라고 다시 말하면 돼요. 대화를 해 보셨으면 맨 아래 버튼으로 완료 표시를 해 주세요.",
+        "id": "first-question",
+        "shortTitle": "2. 첫 질문",
+        "title": "첫 질문! Claude에 물어보기",
+        "summary": "아래 카드 중 하나를 골라 [질문 복사하기]를 누르고, Claude 화면 아래 입력칸에 붙여 넣어 보세요.",
+        "details": "붙여 넣기는 Mac은 Command+V, Windows는 Ctrl+V, 휴대폰은 입력칸을 길게 누르고 [붙여넣기]예요. 답이 마음에 안 들면 \"더 짧게\", \"더 쉽게\"라고 다시 말하면 돼요. 대화를 해 보셨으면 맨 아래 버튼으로 완료 표시를 해 주세요.",
         "promptExamples": [
           {
             "category": "장보기 · 요리",
@@ -183,57 +152,47 @@
           }
         ],
         "web": {
-          "summary": "앱 창 아래 입력칸에 이렇게 물어보세요. 카드를 눌러 복사해 붙여 넣으면 돼요.",
           "notice": "",
-          "buttonLabel": "",
-          "doneLabel": "첫 대화 해 봤어요"
+          "doneLabel": "첫 질문 해 봤어요"
+        }
+      },
+      {
+        "id": "install-aigo",
+        "shortTitle": "3. 앱 설치",
+        "title": "더 편하게 쓰려면 에이아이고 앱 설치하기",
+        "summary": "AI와 대화해 보셨나요? 컴퓨터에 에이아이고 앱을 깔면 AI 비서 앱 설치부터 매일 쓰는 설정까지 버튼 하나로 해 드려요.",
+        "details": "에이아이고 앱이 해 드리는 일: AI 비서 데스크톱 앱 설치와 로그인 안내, 작업 폴더와 말투 규칙(AI 수첩) 자동 만들기, 복용약 체크표·식단표 같은 생활 자동화 레시피, 휴대폰 텔레그램으로 알림 받기. Mac · Windows 컴퓨터용이에요.",
+        "web": {
+          "notice": "처음 한 번은 컴퓨터가 \"확인되지 않은 앱\"이라며 막아요. 앱 받기 화면에 여는 법을 그림 순서대로 적어 두었어요.",
+          "gotoTab": "app",
+          "buttonLabel": "에이아이고 앱 받으러 가기",
+          "doneLabel": "설치했어요"
         }
       }
     ],
     "codex": [
       {
-        "id": "install-agent-cli",
-        "shortTitle": "1. 앱 설치",
-        "title": "OpenAI Codex App / IDE 설치하기",
-        "summary": "AI 비서와 대화하는 앱(OpenAI Codex App / IDE)을 버튼 하나로 설치해요.",
-        "details": "까만 터미널 대신 화면을 보며 쓰는 앱입니다. 자동 설치가 안 되는 컴퓨터에서는 공식 다운로드 페이지를 대신 열어 드려요. 이미 설치되어 있으면 [상태 다시 확인]만 누르세요.",
+        "id": "web-open",
+        "shortTitle": "1. 웹에서 열기",
+        "title": "ChatGPT 웹 화면 열고 로그인하기",
+        "summary": "설치 없이 인터넷 창에서 바로 ChatGPT를 써 봐요. 아래 버튼을 누르면 새 창이 열려요.",
+        "details": "새 창에 [로그인] 버튼이 보이면 눌러서 ChatGPT 계정으로 들어가세요. 이미 로그인되어 있으면 바로 대화 화면이 나와요. 다 됐으면 이 창으로 돌아와 [열었어요]를 누르세요.",
         "externalLink": {
-          "label": "OpenAI Codex App / IDE 공식 다운로드 페이지 직접 열기",
-          "url": "https://openai.com/codex/"
-        },
-        "permissionGuide": {
-          "title": "권한 안내 — 프로그램 설치 승인 (필요할 때 1회)",
-          "what": "Mac 비밀번호 창이나 Windows 허용(UAC) 창이 뜨면 확인을 눌러 주세요.",
-          "benefit": "승인해 주시면 복잡한 웹사이트 이동이나 설치 마법사 클릭 없이 버튼 하나로 앱 설치가 끝납니다.",
-          "safety": "미리 검증된 공식 패키지 관리자(Homebrew · winget)와 공식 다운로드 주소만 사용합니다."
+          "label": "ChatGPT 웹 화면 열기",
+          "url": "https://chatgpt.com/"
         },
         "web": {
-          "summary": "아래 버튼을 누르면 OpenAI Codex App / IDE 공식 다운로드 페이지가 열려요. 받은 파일을 열어 설치해 주세요.",
-          "details": "까만 터미널 대신 화면을 보며 쓰는 앱이에요. 이미 설치되어 있으면 [설치했어요]만 누르세요.",
-          "notice": "설치할 때 Mac 비밀번호 창이나 Windows 허용 창이 뜰 수 있어요. 확인을 눌러 주세요.",
-          "buttonLabel": "OpenAI Codex App / IDE 공식 다운로드 페이지 열기",
-          "doneLabel": "설치했어요"
+          "notice": "휴대폰에서도 돼요. 이 단계와 다음 단계는 어디서든 해 볼 수 있어요.",
+          "buttonLabel": "ChatGPT 웹 화면 열기 (새 창)",
+          "doneLabel": "열었어요"
         }
       },
       {
-        "id": "save-api-key",
-        "shortTitle": "2. 로그인",
-        "title": "OpenAI Codex App / IDE 열고 로그인하기",
-        "summary": "앱을 열고, 쓰시던 계정으로 로그인하세요. 열쇠(API 키)는 필요 없어요.",
-        "details": "기존 ChatGPT 계정으로 로그인하면 API 키를 따로 발급받지 않고도 화면에서 바로 작업을 맡길 수 있습니다.",
-        "web": {
-          "summary": "설치한 앱을 열고, 쓰시던 계정으로 로그인하세요. 열쇠(API 키)는 필요 없어요.",
-          "notice": "",
-          "buttonLabel": "",
-          "doneLabel": "로그인했어요"
-        }
-      },
-      {
-        "id": "first-mission",
-        "shortTitle": "3. 첫 대화",
-        "title": "첫 대화! OpenAI Codex App / IDE에 물어보기",
-        "summary": "앱 창 아래 입력칸에 이렇게 물어보세요. 카드를 눌러 복사해 붙여 넣으면 돼요.",
-        "details": "[질문 복사하기]를 누른 뒤 앱 입력칸에 붙여 넣으세요. 붙여 넣기는 Mac은 Command+V, Windows는 Ctrl+V예요. 답이 마음에 안 들면 \"더 짧게\", \"더 쉽게\"라고 다시 말하면 돼요. 대화를 해 보셨으면 맨 아래 버튼으로 완료 표시를 해 주세요.",
+        "id": "first-question",
+        "shortTitle": "2. 첫 질문",
+        "title": "첫 질문! ChatGPT에 물어보기",
+        "summary": "아래 카드 중 하나를 골라 [질문 복사하기]를 누르고, ChatGPT 화면 아래 입력칸에 붙여 넣어 보세요.",
+        "details": "붙여 넣기는 Mac은 Command+V, Windows는 Ctrl+V, 휴대폰은 입력칸을 길게 누르고 [붙여넣기]예요. 답이 마음에 안 들면 \"더 짧게\", \"더 쉽게\"라고 다시 말하면 돼요. 대화를 해 보셨으면 맨 아래 버튼으로 완료 표시를 해 주세요.",
         "promptExamples": [
           {
             "category": "장보기 · 요리",
@@ -253,10 +212,21 @@
           }
         ],
         "web": {
-          "summary": "앱 창 아래 입력칸에 이렇게 물어보세요. 카드를 눌러 복사해 붙여 넣으면 돼요.",
           "notice": "",
-          "buttonLabel": "",
-          "doneLabel": "첫 대화 해 봤어요"
+          "doneLabel": "첫 질문 해 봤어요"
+        }
+      },
+      {
+        "id": "install-aigo",
+        "shortTitle": "3. 앱 설치",
+        "title": "더 편하게 쓰려면 에이아이고 앱 설치하기",
+        "summary": "AI와 대화해 보셨나요? 컴퓨터에 에이아이고 앱을 깔면 AI 비서 앱 설치부터 매일 쓰는 설정까지 버튼 하나로 해 드려요.",
+        "details": "에이아이고 앱이 해 드리는 일: AI 비서 데스크톱 앱 설치와 로그인 안내, 작업 폴더와 말투 규칙(AI 수첩) 자동 만들기, 복용약 체크표·식단표 같은 생활 자동화 레시피, 휴대폰 텔레그램으로 알림 받기. Mac · Windows 컴퓨터용이에요.",
+        "web": {
+          "notice": "처음 한 번은 컴퓨터가 \"확인되지 않은 앱\"이라며 막아요. 앱 받기 화면에 여는 법을 그림 순서대로 적어 두었어요.",
+          "gotoTab": "app",
+          "buttonLabel": "에이아이고 앱 받으러 가기",
+          "doneLabel": "설치했어요"
         }
       }
     ]
