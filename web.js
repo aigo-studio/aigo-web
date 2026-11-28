@@ -10,8 +10,17 @@
     done: 'aigo-web.done', // { [agentId]: [stepId, ...] }
   };
   const MOBILE_QUERY = window.matchMedia('(max-width: 600px)');
-  const esc = (t) => window.GlossaryHelper.escapeHtml(t == null ? '' : String(t));
-  const hl = (t) => window.GlossaryHelper.highlightText(t || '');
+  // 웹에는 용어사전(밑줄 풀이)을 두지 않는다. 수업 코드(learnTab.js)가 부르는 이름만 남겨 글자를 그대로 보여 준다
+  const escapeHtml = (t) =>
+    String(t == null ? '' : t)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  window.GlossaryHelper = { escapeHtml, highlightText: escapeHtml };
+  const esc = escapeHtml;
+  const hl = (t) => escapeHtml(t || '');
 
   const state = {
     content: null,
@@ -31,7 +40,6 @@
     views: {
       setup: $('setup-view'),
       habits: $('habits-view'),
-      glossary: $('glossary-view'),
       app: $('app-view'),
     },
     stepList: $('step-list'),
@@ -53,18 +61,6 @@
     linkBtn: $('external-link-btn'),
     reopenBtn: $('reopen-link-btn'),
     doneBtn: $('done-btn'),
-    glossaryPageSearch: $('glossary-page-search'),
-    glossaryPageList: $('glossary-page-list'),
-    drawer: $('glossary-drawer'),
-    drawerClose: $('glossary-close-btn'),
-    drawerSelCard: $('glossary-selection-card'),
-    drawerSelBody: $('glossary-selection-body'),
-    drawerSearch: $('glossary-search-input'),
-    drawerList: $('glossary-list'),
-    tooltip: $('glossary-tooltip'),
-    tooltipTitle: $('glossary-tooltip-title'),
-    tooltipMeaning: $('glossary-tooltip-meaning'),
-    tooltipAnalogy: $('glossary-tooltip-analogy'),
     appVersion: $('app-version'),
   };
 
@@ -160,7 +156,6 @@
     });
     if (tab === 'habits') window.LearnTab.render();
     if (tab === 'app') trackEvent('web/get-app');
-    hideTooltip();
     window.scrollTo(0, 0);
   }
 
@@ -412,115 +407,6 @@
     window.LearnTab.render();
   }
 
-  // --- 용어사전 (호버 말풍선 · 클릭하면 서랍 · 검색). 드래그 풀이는 없다 ---
-  function glossaryItemHtml(entry) {
-    return `<div class="glossary-item-title">${esc(entry.easyTitle)}</div><p class="glossary-item-meaning">${esc(entry.meaning)}</p><p class="glossary-item-analogy">쉬운 비유: ${esc(entry.analogy)}</p>`;
-  }
-
-  function askButton(word) {
-    const btn = document.createElement('button');
-    btn.type = 'button';
-    btn.className = 'prompt-copy-btn';
-    btn.textContent = 'AI 비서에게 물어볼 질문 복사';
-    btn.addEventListener('click', () =>
-      copyText(
-        btn,
-        `"${word}"이(가) 무슨 뜻인지 어른도 이해하기 쉽게 일상 비유를 들어 2줄로 설명해 줘.`,
-        'AI 비서에게 물어볼 질문 복사',
-        '질문 복사 완료!'
-      )
-    );
-    return btn;
-  }
-
-  function renderGlossaryList(container, query, focusedKey) {
-    const items = window.GlossaryHelper.search(query);
-    container.innerHTML = '';
-    if (items.length === 0) {
-      const empty = document.createElement('p');
-      empty.className = 'glossary-item-analogy';
-      empty.textContent = '사전에 일치하는 단어가 없습니다. 다른 단어로 검색해 보세요.';
-      container.appendChild(empty);
-      const word = String(query || '').trim();
-      if (word.length >= 2 && word.length <= 40) container.appendChild(askButton(word));
-      return;
-    }
-    items.forEach((entry) => {
-      const div = document.createElement('div');
-      div.className = `glossary-item${entry.key === focusedKey ? ' focused' : ''}`;
-      div.innerHTML = glossaryItemHtml(entry);
-      container.appendChild(div);
-    });
-  }
-
-  function openDrawerFor(key) {
-    const entry = window.GlossaryHelper.getByKey(key);
-    if (!entry) return;
-    el.drawerSelBody.innerHTML = glossaryItemHtml(entry);
-    el.drawerSelCard.classList.remove('hidden');
-    el.drawerSearch.value = '';
-    renderGlossaryList(el.drawerList, '', entry.key);
-    el.drawer.classList.remove('hidden');
-    const focused = el.drawerList.querySelector('.focused');
-    if (focused) focused.scrollIntoView({ block: 'nearest' });
-  }
-
-  function showTooltip(target) {
-    const entry = window.GlossaryHelper.getByKey(target.getAttribute('data-term-key'));
-    if (!entry) return;
-    el.tooltipTitle.textContent = entry.easyTitle;
-    el.tooltipMeaning.textContent = entry.meaning;
-    el.tooltipAnalogy.textContent = `쉬운 비유: ${entry.analogy}`;
-    el.tooltip.classList.remove('hidden');
-    const rect = target.getBoundingClientRect();
-    const tip = el.tooltip.getBoundingClientRect();
-    let top = rect.bottom + 10;
-    if (top + tip.height > window.innerHeight - 12) top = Math.max(12, rect.top - tip.height - 10);
-    let left = rect.left;
-    if (left + tip.width > window.innerWidth - 12) left = Math.max(12, window.innerWidth - tip.width - 12);
-    el.tooltip.style.top = `${top}px`;
-    el.tooltip.style.left = `${left}px`;
-  }
-
-  function hideTooltip() {
-    el.tooltip.classList.add('hidden');
-  }
-
-  function initGlossary() {
-    renderGlossaryList(el.glossaryPageList, '');
-    renderGlossaryList(el.drawerList, '');
-    el.glossaryPageSearch.addEventListener('input', (e) => renderGlossaryList(el.glossaryPageList, e.target.value));
-    el.drawerSearch.addEventListener('input', (e) => renderGlossaryList(el.drawerList, e.target.value));
-    el.drawerClose.addEventListener('click', () => el.drawer.classList.add('hidden'));
-
-    // 마우스가 있는 화면에서만 말풍선 (휴대폰은 누르면 서랍)
-    const canHover = window.matchMedia('(hover: hover)').matches;
-    if (canHover) {
-      document.addEventListener('mouseover', (e) => {
-        const term = e.target.closest('.glossary-term');
-        if (term) showTooltip(term);
-      });
-      document.addEventListener('mouseout', (e) => {
-        if (e.target.closest('.glossary-term')) hideTooltip();
-      });
-    }
-    document.addEventListener('click', (e) => {
-      const term = e.target.closest('.glossary-term');
-      if (!term) return;
-      hideTooltip();
-      openDrawerFor(term.getAttribute('data-term-key'));
-    });
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        el.drawer.classList.add('hidden');
-        hideTooltip();
-      }
-      if (e.key === 'Enter' && e.target.classList && e.target.classList.contains('glossary-term')) {
-        openDrawerFor(e.target.getAttribute('data-term-key'));
-      }
-    });
-  }
-
   // --- 앱 받기: 이 컴퓨터에 맞는 설치 파일을 바로 받는다 ---
   function detectComputer() {
     const ua = navigator.userAgent || '';
@@ -673,11 +559,11 @@
 
     applyFontScale(currentFontScale());
     bindEvents();
-    initGlossary();
 
     window.LearnTab.init({
       getState: () => ({
-        lessons: state.content.lessons,
+        // 웹은 앱 기능(수첩 파일 · 연결 도구) 없이 읽을 수 있는 웹용 수업을 쓴다
+        lessons: state.content.webLessons || state.content.lessons,
         selectedAgentId: state.agentId || 'gemini',
         running: false,
       }),

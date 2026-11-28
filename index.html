@@ -13,9 +13,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&amp;family=Noto+Serif+KR:wght@600;700&amp;display=swap" />
-  <link rel="stylesheet" href="./styles.css?v=1fee1a92" />
-  <link rel="stylesheet" href="./web.css?v=1fee1a92" />
-  <link rel="stylesheet" href="./guide.css?v=1fee1a92" />
+  <link rel="stylesheet" href="./styles.css?v=a6ab458f" />
+  <link rel="stylesheet" href="./web.css?v=a6ab458f" />
+  <link rel="stylesheet" href="./guide.css?v=a6ab458f" />
 </head>
 <body class="web">
   <div id="boot-loading" class="boot-loading" role="status" aria-live="polite">
@@ -34,7 +34,6 @@
         <nav id="main-tabs" class="g-tabs" aria-label="주요 메뉴">
           <button type="button" class="tab-btn active" data-tab="setup">첫걸음</button>
           <button type="button" class="tab-btn" data-tab="habits">AI와 오래 잘 지내기</button>
-          <button type="button" class="tab-btn" data-tab="glossary">쉬운 용어사전</button>
           <button type="button" class="tab-btn" data-tab="app">앱 받기</button>
         </nav>
         <div id="font-size-selector" class="g-font" role="group" aria-label="글씨 크기">
@@ -136,25 +135,11 @@
       <div class="recipes-container">
         <div class="recipes-header">
           <div>
-            <h1 class="recipes-heading">AI와 오래 잘 지내기 — 덜 막히고, 덜 쓰는 습관</h1>
-            <p class="recipes-sub">AI 비서를 설치한 뒤 매일 부딪히는 수첩·공책·사용량 이야기를 여섯 수업으로 정리했습니다. 위에서부터 차례로 읽어 보세요.</p>
+            <h1 class="recipes-heading">AI와 오래 잘 지내기</h1>
+            <p class="recipes-sub">AI와 매일 이야기하다 보면 자주 만나는 일들을 다섯 가지로 정리했어요. 위에서부터 차례로 읽어 보세요.</p>
           </div>
         </div>
         <div id="habits-lessons" class="lesson-list"></div>
-      </div>
-    </main>
-
-    <!-- 쉬운 용어사전 -->
-    <main id="glossary-view" class="recipes-view hidden">
-      <div class="recipes-container">
-        <div class="recipes-header">
-          <div>
-            <h1 class="recipes-heading">쉬운 용어사전</h1>
-            <p class="recipes-sub">낯선 단어를 찾아보세요. 다른 화면에서 밑줄 친 단어에 마우스를 올리거나 누르면 바로 풀이가 나와요.</p>
-          </div>
-        </div>
-        <input id="glossary-page-search" class="text-input glossary-search" type="search" placeholder="찾을 단어 (예: 터미널, API 키)" aria-label="용어 찾기" />
-        <div id="glossary-page-list" class="glossary-list web-glossary-page-list"></div>
       </div>
     </main>
 
@@ -229,32 +214,9 @@
       </div>
     </main>
 
-    <!-- 밑줄 단어를 누르면 열리는 서랍 -->
-    <aside id="glossary-drawer" class="glossary-drawer hidden" aria-label="쉬운 용어사전">
-      <div class="glossary-drawer-header">
-        <div>
-          <h2 class="glossary-drawer-title">쉬운 용어사전</h2>
-          <p class="glossary-drawer-hint">밑줄 친 단어에 마우스를 올리거나 누르면 풀이해 드려요.</p>
-        </div>
-        <button id="glossary-close-btn" class="btn btn-small" type="button">닫기</button>
-      </div>
-      <div id="glossary-selection-card" class="glossary-selection-card hidden">
-        <div class="glossary-selection-label">단어 풀이</div>
-        <div id="glossary-selection-body"></div>
-      </div>
-      <input id="glossary-search-input" class="text-input glossary-search" type="search" placeholder="찾을 단어" aria-label="용어 찾기" />
-      <div id="glossary-list" class="glossary-list"></div>
-    </aside>
   </div>
 
-  <div id="glossary-tooltip" class="glossary-tooltip hidden" role="tooltip">
-    <div id="glossary-tooltip-title" class="glossary-tooltip-title"></div>
-    <p id="glossary-tooltip-meaning" class="glossary-tooltip-meaning"></p>
-    <p id="glossary-tooltip-analogy" class="glossary-tooltip-analogy"></p>
-  </div>
-
-  <script src="./glossary.js?v=1fee1a92"></script>
-  <script src="./learnTab.js?v=1fee1a92"></script>
-  <script src="./web.js?v=1fee1a92"></script>
+  <script src="./learnTab.js?v=a6ab458f"></script>
+  <script src="./web.js?v=a6ab458f"></script>
 </body>
 </html>
