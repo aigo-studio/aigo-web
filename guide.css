@@ -735,3 +735,72 @@ body.web .btn-primary:hover:not(:disabled) {
     flex: 1 1 100%;
   }
 }
+
+/* ===== 에이아이고 앱: 실제 화면 미리보기 ===== */
+.g-preview {
+  align-self: stretch;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+  gap: 28px 24px;
+  margin: 8px 0 4px;
+}
+
+.g-shot {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.g-shot a {
+  display: block;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  background: #f7f8fa;
+  box-shadow: 0 1px 2px rgba(28, 36, 48, 0.06);
+}
+
+.g-shot img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.g-shot figcaption {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+
+.g-shot figcaption strong {
+  display: block;
+  font-family: var(--serif);
+  font-size: 19px;
+  color: var(--ink);
+  margin-bottom: 2px;
+}
+
+/* 첫걸음: 안전하게 쓰기 */
+.g-safety {
+  margin-top: 3.2em;
+  padding: 1.4em 1.6em;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  font-size: 0.94em;
+  color: var(--ink-soft);
+}
+
+.g-safety p {
+  margin: 0 0 0.6em;
+}
+
+.g-safety ul {
+  margin: 0;
+  padding-left: 1.2em;
+}
+
+.g-safety + .g-about {
+  margin-top: 2em;
+}

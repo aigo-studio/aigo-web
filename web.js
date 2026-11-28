@@ -10,7 +10,7 @@
     done: 'aigo-web.done', // { [agentId]: [stepId, ...] }
   };
   const MOBILE_QUERY = window.matchMedia('(max-width: 600px)');
-  // 웹에는 용어사전(밑줄 풀이)을 두지 않는다. 수업 코드(learnTab.js)가 부르는 이름만 남겨 글자를 그대로 보여 준다
+  // 웹에는 용어사전(밑줄 풀이)을 두지 않는다. 글자는 그대로 보여 준다
   const escapeHtml = (t) =>
     String(t == null ? '' : t)
       .replace(/&/g, '&amp;')
@@ -18,7 +18,6 @@
       .replace(/>/g, '&gt;')
       .replace(/"/g, '&quot;')
       .replace(/'/g, '&#39;');
-  window.GlossaryHelper = { escapeHtml, highlightText: escapeHtml };
   const esc = escapeHtml;
   const hl = (t) => escapeHtml(t || '');
 
@@ -39,7 +38,6 @@
     tabs: $('main-tabs'),
     views: {
       setup: $('setup-view'),
-      habits: $('habits-view'),
       app: $('app-view'),
     },
     stepList: $('step-list'),
@@ -154,7 +152,6 @@
     el.tabs.querySelectorAll('.tab-btn').forEach((btn) => {
       btn.classList.toggle('active', btn.getAttribute('data-tab') === tab);
     });
-    if (tab === 'habits') window.LearnTab.render();
     if (tab === 'app') trackEvent('web/get-app');
     window.scrollTo(0, 0);
   }
@@ -404,7 +401,6 @@
     state.stepIndex = firstOpen === -1 ? list.length - 1 : firstOpen;
     state.nextCardClosed = false;
     renderSetup();
-    window.LearnTab.render();
   }
 
   // --- 앱 받기: 이 컴퓨터에 맞는 설치 파일을 바로 받는다 ---
@@ -559,17 +555,6 @@
 
     applyFontScale(currentFontScale());
     bindEvents();
-
-    window.LearnTab.init({
-      getState: () => ({
-        // 웹은 앱 기능(수첩 파일 · 연결 도구) 없이 읽을 수 있는 웹용 수업을 쓴다
-        lessons: state.content.webLessons || state.content.lessons,
-        selectedAgentId: state.agentId || 'gemini',
-        running: false,
-      }),
-      setRunning: () => {},
-      getDryRun: () => true,
-    });
 
     // 처음 오신 분은 추천 비서(Gemini)로 시작한다. 위에서 언제든 바꿀 수 있다
     const saved = readStore(STORE.agent, null);

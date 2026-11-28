@@ -48,7 +48,7 @@
 
 ## 3. 에이아이고 앱 받기
 
-1. https://aigo-studio.github.io/aigo-web/ 에 들어가 위쪽 [앱 받기]를 누르세요.
+1. https://aigo-studio.github.io/aigo-web/ 에 들어가 위쪽 [에이아이고 앱]을 누르세요. 실제 앱 화면 미리보기 아래에 내려받기 버튼이 있어요.
 2. 내 컴퓨터에 맞는 버튼을 누르세요. 페이지가 내 컴퓨터를 알아보고 맞는 버튼을 파랗게 칠해 둬요.
    - **Windows** → 설치 파일 `.exe`
    - **요즘 Mac (Apple 칩, M1·M2·M3·M4, 2021년 무렵 이후)** → `mac-apple.dmg`

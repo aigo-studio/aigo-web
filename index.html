@@ -13,9 +13,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&amp;family=Noto+Serif+KR:wght@600;700&amp;display=swap" />
-  <link rel="stylesheet" href="./styles.css?v=a6ab458f" />
-  <link rel="stylesheet" href="./web.css?v=a6ab458f" />
-  <link rel="stylesheet" href="./guide.css?v=a6ab458f" />
+  <link rel="stylesheet" href="./styles.css?v=5ff35cf2" />
+  <link rel="stylesheet" href="./web.css?v=5ff35cf2" />
+  <link rel="stylesheet" href="./guide.css?v=5ff35cf2" />
 </head>
 <body class="web">
   <div id="boot-loading" class="boot-loading" role="status" aria-live="polite">
@@ -33,8 +33,7 @@
         </div>
         <nav id="main-tabs" class="g-tabs" aria-label="주요 메뉴">
           <button type="button" class="tab-btn active" data-tab="setup">첫걸음</button>
-          <button type="button" class="tab-btn" data-tab="habits">AI와 오래 잘 지내기</button>
-          <button type="button" class="tab-btn" data-tab="app">앱 받기</button>
+          <button type="button" class="tab-btn" data-tab="app">에이아이고 앱</button>
         </nav>
         <div id="font-size-selector" class="g-font" role="group" aria-label="글씨 크기">
           <span class="g-font-label">글씨</span>
@@ -72,16 +71,15 @@
         <p class="g-hint">잘 모르겠으면 Gemini로 시작하세요. 나중에 바꿀 수 있어요.</p>
         <div id="ollama-note" class="g-callout hidden" role="note">
           <p>로컬 Ollama는 AI 모델을 내려받을 때 까만 터미널 창이 필요해서, 이 웹 페이지로는 도와드릴 수 없어요. 에이아이고 앱을 받으시면 버튼 하나로 해 드려요.</p>
-          <button type="button" class="g-btn g-btn-outline" data-goto="app">앱 받기 화면으로</button>
+          <button type="button" class="g-btn g-btn-outline" data-goto="app">에이아이고 앱 화면으로</button>
         </div>
       </section>
 
       <section id="next-card" class="g-done hidden" aria-label="다음에 해 볼 것">
         <h2 class="g-h2">첫걸음을 모두 마치셨어요</h2>
-        <p>이제 AI와 매일 이야기해 보세요. 더 잘 쓰고 싶으시면 아래를 이어서 보세요.</p>
+        <p>이제 AI와 매일 이야기해 보세요. 생활 레시피나 휴대폰 알림처럼 더 해 보고 싶으시면 에이아이고 앱을 둘러보세요.</p>
         <div class="g-btn-row">
-          <button type="button" class="g-btn g-btn-primary" data-goto="habits">AI와 오래 잘 지내기 읽기</button>
-          <button type="button" class="g-btn g-btn-outline" data-goto="app">앱 받기 화면 보기</button>
+          <button type="button" class="g-btn g-btn-primary" data-goto="app">에이아이고 앱 미리 보기</button>
           <button id="next-card-close-btn" type="button" class="g-btn g-btn-quiet">닫기</button>
         </div>
       </section>
@@ -115,6 +113,16 @@
         </div>
       </section>
 
+      <section class="g-safety" aria-labelledby="safety-title">
+        <h2 id="safety-title" class="g-h3">AI를 쓸 때 꼭 지켜 주세요</h2>
+        <p>AI는 똑똑하지만 틀릴 때도 있어요. 그럴듯하게 틀린 말을 하기도 해요.</p>
+        <ul>
+          <li>비밀번호, 인증번호, 카드 번호, 주민등록번호는 AI에게 알려 주지 않기</li>
+          <li>약 · 병원 · 돈 문제는 AI 답을 참고만 하고, 의사 · 약사 · 은행에 꼭 확인하기</li>
+          <li>AI가 알려 준 링크나 전화번호는 공식 홈페이지에서 한 번 더 확인하기</li>
+        </ul>
+      </section>
+
       <section class="g-about" aria-label="이 안내에 대해">
         <div>
           <h2 class="g-h3">이 안내를 만든 곳</h2>
@@ -130,32 +138,32 @@
       </section>
     </main>
 
-    <!-- AI와 오래 잘 지내기 -->
-    <main id="habits-view" class="recipes-view hidden">
-      <div class="recipes-container">
-        <div class="recipes-header">
-          <div>
-            <h1 class="recipes-heading">AI와 오래 잘 지내기</h1>
-            <p class="recipes-sub">AI와 매일 이야기하다 보면 자주 만나는 일들을 다섯 가지로 정리했어요. 위에서부터 차례로 읽어 보세요.</p>
-          </div>
-        </div>
-        <div id="habits-lessons" class="lesson-list"></div>
-      </div>
-    </main>
-
-    <!-- 앱 받기 -->
+    <!-- 에이아이고 앱: 실제 화면 미리보기 · 내려받기 -->
     <main id="app-view" class="recipes-view hidden">
       <div class="recipes-container">
         <section class="recipe-detail web-app-card">
-          <h1 class="recipes-heading">에이아이고 앱 — AI 첫걸음을 차근차근 알려 주는 앱</h1>
-          <p class="recipes-sub">이 페이지에서는 웹으로 AI를 살짝 맛보았어요. 에이아이고 앱을 컴퓨터에 깔면, AI를 매일 쓰기까지 필요한 설치와 설정을 한 걸음씩 알려 주고 버튼 하나로 도와드려요.</p>
-          <ul class="web-app-perks">
-            <li>Gemini · Claude · ChatGPT 같은 AI 프로그램 설치와 로그인을 손쉽게 도와드려요</li>
-            <li>작업 폴더와 말투 규칙을 자동으로 만들어 드려요</li>
-            <li>복용약 체크표·식단표 같은 생활 자동화 레시피</li>
-            <li>휴대폰 텔레그램으로 알림 받기</li>
-          </ul>
-          <p class="integration-note">Mac · Windows 컴퓨터용이에요. 휴대폰에는 깔 수 없어요.</p>
+          <h1 class="recipes-heading">에이아이고 앱</h1>
+          <p class="recipes-sub">AI 첫걸음을 차근차근 알려 주는 무료 컴퓨터 앱이에요. 웹에서 맛본 다음 단계를, 앱에서는 버튼을 눌러 가며 이어 갈 수 있어요. 아래는 실제 앱 화면이에요.</p>
+
+          <div class="g-preview" aria-label="에이아이고 앱 화면 미리보기">
+            <figure class="g-shot">
+              <a href="./assets/app-preview/welcome.jpg" target="_blank" rel="noopener"><img src="./assets/app-preview/welcome.jpg" width="1200" height="800" loading="lazy" alt="에이아이고 앱 첫 화면. 'AI 비서와 처음 만나실 준비를 도와드릴게요'라는 제목 아래 글씨 크기를 보통 · 크게 · 아주 크게 중에서 고르는 버튼이 있다." /></a>
+              <figcaption><strong>처음 켜면, 글씨 크기부터</strong>몇 가지만 여쭤보고, 그다음엔 순서대로 버튼만 누르시면 돼요.</figcaption>
+            </figure>
+            <figure class="g-shot">
+              <a href="./assets/app-preview/setup.jpg" target="_blank" rel="noopener"><img src="./assets/app-preview/setup.jpg" width="1200" height="800" loading="lazy" alt="초기 가이드 화면. 왼쪽에 1부 기본 준비 단계 목록이 있고, 오른쪽에 'Gemini 데스크톱 앱 자동 설치하기' 안내와 설치 승인 창에 대한 설명이 있다." /></a>
+              <figcaption><strong>AI 프로그램 설치를 차례대로</strong>왼쪽 단계를 따라 버튼을 누르면 Gemini 같은 AI 프로그램 설치와 로그인까지 도와드려요. 설치 승인 창이 뜨면 확인만 누르세요.</figcaption>
+            </figure>
+            <figure class="g-shot">
+              <a href="./assets/app-preview/recipes.jpg" target="_blank" rel="noopener"><img src="./assets/app-preview/recipes.jpg" width="1200" height="800" loading="lazy" alt="시작해보기 화면. 큰 글씨 복용약 · 혈압 체크표, 냉장고 재료로 일주일 식단 · 장보기표, 병원 진료 · 약 봉투 메모 정리함, 아침 브리핑 자동화 카드가 있다." /></a>
+              <figcaption><strong>생활에 바로 쓰는 레시피</strong>복용약 · 혈압 체크표, 일주일 식단과 장보기표, 병원 메모 정리, 아침 브리핑을 버튼 하나로 준비해요.</figcaption>
+            </figure>
+            <figure class="g-shot">
+              <a href="./assets/app-preview/integrations.jpg" target="_blank" rel="noopener"><img src="./assets/app-preview/integrations.jpg" width="1200" height="800" loading="lazy" alt="알림 · 기록 연동 화면. 텔레그램 봇 연결하기 카드와 Obsidian 수첩 초기화 카드가 있다." /></a>
+              <figcaption><strong>휴대폰으로 알림 받기</strong>텔레그램을 연결하면 자동화가 끝날 때마다 휴대폰으로 알려 드려요. 메모 앱(Obsidian)에 차곡차곡 모아 둘 수도 있어요.</figcaption>
+            </figure>
+          </div>
+          <p class="integration-note">화면은 에이아이고 v0.1.0(Mac)의 실제 모습이에요. 사진을 누르면 크게 볼 수 있어요. Mac · Windows 컴퓨터용이고, 휴대폰에는 깔 수 없어요.</p>
 
           <div class="web-download">
             <h2 class="web-download-title">1. 내 컴퓨터에 맞는 파일 받기</h2>
@@ -216,7 +224,6 @@
 
   </div>
 
-  <script src="./learnTab.js?v=a6ab458f"></script>
-  <script src="./web.js?v=a6ab458f"></script>
+  <script src="./web.js?v=5ff35cf2"></script>
 </body>
 </html>
