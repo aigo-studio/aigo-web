@@ -1,0 +1,737 @@
+/*
+ * 'B안 · 차분한 안내서' 모양 (웹 첫걸음 페이지 전용).
+ * styles.css · web.css 뒤에 읽는다. 다른 탭(수업 · 용어사전 · 앱 받기)은 색과 글꼴만 맞춘다.
+ * 첫걸음 화면(.g-setup) 안의 크기는 em으로 적어, 글씨 크기 버튼이 글자 크기만 키우게 한다.
+ */
+
+:root {
+  --bg: #fbfaf7;
+  --surface: #ffffff;
+  --ink: #1c2430;
+  --ink-soft: #3a4250;
+  --muted: #5a6270;
+  --border: #e3e0d8;
+  --border-strong: #b9b4a8;
+  --primary: #1f4e8c;
+  --primary-hover: #163a69;
+  --primary-soft: #f4f6f9;
+  --success-bg: #e8f2ec;
+  --success-ink: #2f6b4f;
+  --warn-bg: #fbf6e9;
+  --warn-ink: #6b4b00;
+  --warn-border: #eadfbf;
+  --serif: 'Noto Serif KR', 'AppleMyungjo', 'Batang', serif;
+  --sans: 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+body.web {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--ink);
+}
+
+body.web a {
+  color: var(--primary);
+}
+
+body.web a:hover {
+  color: var(--primary-hover);
+}
+
+.g-wrap {
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.g-muted {
+  color: var(--muted);
+}
+
+/* ===== 위쪽 줄 ===== */
+.g-header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+
+.g-header-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 24px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.g-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.g-brand-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+}
+
+.g-brand-title {
+  font-size: 17px;
+  font-weight: 700;
+}
+
+body.web .g-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 20px;
+  background: none;
+  padding: 0;
+}
+
+body.web .g-tabs .tab-btn {
+  min-height: 48px;
+  padding: 0;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  color: var(--muted);
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+body.web .g-tabs .tab-btn.active {
+  color: var(--ink);
+  font-weight: 700;
+  border-bottom-color: var(--ink);
+  background: none;
+  box-shadow: none;
+}
+
+.g-font {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 3px;
+  border: 1px solid #d5d1c7;
+  border-radius: 8px;
+}
+
+.g-font-label {
+  padding: 0 8px 0 6px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+body.web .g-font .font-btn {
+  min-height: 40px;
+  padding: 0 12px;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--ink);
+  background: transparent;
+}
+
+body.web .g-font .font-btn.active {
+  background: var(--ink);
+  color: #ffffff;
+}
+
+/* ===== 첫걸음 화면 ===== */
+.g-setup {
+  font-size: 17px;
+  line-height: 1.7;
+  padding-top: 2.8em;
+  padding-bottom: 1.5em;
+}
+
+body.font-large .g-setup {
+  font-size: 19px;
+}
+
+body.font-xlarge .g-setup {
+  font-size: 21px;
+}
+
+.g-eyebrow {
+  margin: 0 0 0.5em;
+  font-size: 0.88em;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.g-title {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: clamp(1.75em, 3.6vw, 2.5em);
+  line-height: 1.35;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.g-lead {
+  margin: 0.8em 0 0;
+  font-size: 1.06em;
+  color: var(--ink-soft);
+  max-width: 40em;
+}
+
+.g-h2 {
+  margin: 0 0 0.7em;
+  font-size: 1.06em;
+  font-weight: 700;
+}
+
+.g-h3 {
+  margin: 0 0 0.5em;
+  font-family: var(--serif);
+  font-size: 1.18em;
+  font-weight: 700;
+}
+
+.g-hint {
+  margin: 0.6em 0 0;
+  font-size: 0.82em;
+  color: var(--muted);
+}
+
+/* 믿을 근거 세 줄 */
+.g-trust {
+  margin: 1.6em 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.g-trust li {
+  display: flex;
+  gap: 12px;
+  padding: 0.95em 1.05em;
+  font-size: 0.88em;
+  /* 줄이 바뀌어도 칸 사이 선이 남게 */
+  box-shadow: 1px 0 0 var(--border), 0 1px 0 var(--border);
+}
+
+.g-trust svg {
+  flex: none;
+  margin-top: 3px;
+  color: var(--success-ink);
+}
+
+.g-trust strong {
+  display: block;
+}
+
+/* AI 고르기 */
+.g-pick {
+  margin-top: 2.4em;
+}
+
+.g-pick-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+  gap: 10px;
+}
+
+.g-pick-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 64px;
+  padding: 0.7em 1em;
+  border: 1px solid #d5d1c7;
+  border-radius: 10px;
+  background: var(--surface);
+  color: var(--ink);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.g-pick-item:hover {
+  border-color: var(--border-strong);
+}
+
+.g-pick-item.selected {
+  background: var(--primary-soft);
+  border: 2px solid var(--primary);
+}
+
+.g-pick-item.app-only {
+  background: transparent;
+  border-style: dashed;
+}
+
+.g-radio {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid #8a8f99;
+  background: var(--surface);
+  box-sizing: border-box;
+}
+
+.g-pick-item.selected .g-radio {
+  border: 6px solid var(--primary);
+}
+
+.g-pick-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.g-pick-name {
+  font-weight: 700;
+  font-size: 1em;
+}
+
+.g-pick-need {
+  font-size: 0.82em;
+  color: var(--muted);
+}
+
+/* 안내 상자 (휴대폰 안내 · Ollama 안내) */
+.g-callout {
+  margin-top: 1em;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 16px;
+  padding: 0.9em 1.05em;
+  background: var(--warn-bg);
+  border: 1px solid var(--warn-border);
+  border-radius: 10px;
+  color: var(--ink);
+  font-size: 0.94em;
+}
+
+.g-callout p {
+  margin: 0;
+  flex: 1 1 280px;
+}
+
+#step-card .g-callout {
+  margin: 0 0 1.2em;
+}
+
+/* 다 마쳤을 때 */
+.g-done {
+  margin-top: 2.4em;
+  padding: 1.4em 1.6em;
+  background: var(--success-bg);
+  border-radius: 14px;
+}
+
+.g-done .g-h2 {
+  font-family: var(--serif);
+  font-size: 1.3em;
+  margin-bottom: 0.3em;
+}
+
+.g-done p {
+  margin: 0 0 1em;
+  color: var(--ink-soft);
+}
+
+/* 단계: 왼쪽 목록 + 오른쪽 안내 */
+.g-steps {
+  margin-top: 2.4em;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.g-step-list {
+  flex: 1 1 220px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.g-step {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 64px;
+  padding: 0.55em 0.85em;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.g-step:hover {
+  background: rgba(31, 78, 140, 0.05);
+}
+
+.g-step.active {
+  background: var(--surface);
+  box-shadow: inset 3px 0 0 var(--primary);
+}
+
+.g-step-num {
+  flex: none;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 15px;
+  background: var(--surface);
+  color: var(--muted);
+  border: 1.5px solid var(--border-strong);
+  box-sizing: border-box;
+}
+
+.g-step.active .g-step-num {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #ffffff;
+}
+
+.g-step.done .g-step-num {
+  background: var(--success-ink);
+  border-color: var(--success-ink);
+  color: #ffffff;
+}
+
+.g-step-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.g-step-name {
+  font-weight: 700;
+  font-size: 0.96em;
+}
+
+.g-step-state {
+  font-size: 0.78em;
+  color: var(--muted);
+}
+
+.g-panel {
+  flex: 999 1 560px;
+  min-width: 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: clamp(1.3em, 3.5vw, 2.4em);
+  display: flex;
+  flex-direction: column;
+  gap: 0.95em;
+}
+
+.g-step-count {
+  margin: 0;
+  font-size: 0.88em;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.g-panel-title {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 1.6em;
+  line-height: 1.4;
+  font-weight: 700;
+}
+
+.g-panel-text {
+  margin: 0;
+  color: var(--ink-soft);
+}
+
+.g-more {
+  font-size: 0.94em;
+  color: var(--ink-soft);
+}
+
+.g-more summary {
+  cursor: pointer;
+  color: var(--primary);
+  font-weight: 700;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+
+.g-more p {
+  margin: 0.2em 0 0;
+}
+
+.g-notice {
+  padding: 0.85em 1em;
+  background: var(--primary-soft);
+  border-radius: 10px;
+  font-size: 0.94em;
+}
+
+.g-notice.warn {
+  background: var(--warn-bg);
+  border: 1px solid var(--warn-border);
+}
+
+.g-notice strong {
+  display: block;
+}
+
+.g-address {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0.75em 1em;
+  background: var(--primary-soft);
+  border-radius: 10px;
+  font-size: 0.94em;
+  overflow-wrap: anywhere;
+}
+
+.g-address svg {
+  flex: none;
+  color: var(--success-ink);
+}
+
+/* 질문 목록 */
+.g-prompts {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--border);
+}
+
+.g-prompt {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 16px;
+  padding: 1em 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.g-prompt-text {
+  flex: 1 1 300px;
+  display: flex;
+  flex-direction: column;
+}
+
+.g-prompt-cat {
+  font-size: 0.78em;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+/* 버튼 */
+.g-btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.g-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  padding: 0 1.3em;
+  border-radius: 10px;
+  font: inherit;
+  font-size: 1em;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+body.web a.g-btn-primary,
+.g-btn-primary {
+  background: var(--primary);
+  color: #ffffff;
+  border: 1px solid var(--primary);
+}
+
+body.web a.g-btn-primary:hover,
+.g-btn-primary:hover {
+  background: var(--primary-hover);
+  color: #ffffff;
+}
+
+body.web a.g-btn-outline,
+.g-btn-outline {
+  background: var(--surface);
+  color: var(--ink);
+  border: 1px solid var(--border-strong);
+}
+
+.g-btn-outline:hover {
+  border-color: var(--ink);
+}
+
+.g-btn-quiet {
+  background: transparent;
+  color: var(--muted);
+  border: 0;
+}
+
+.g-btn.is-done {
+  background: var(--success-bg);
+  color: var(--success-ink);
+  border-color: var(--success-bg);
+}
+
+.g-copy {
+  flex: none;
+  min-width: 96px;
+  min-height: 48px;
+  color: var(--primary);
+  border-color: var(--primary);
+}
+
+.g-copy.copied {
+  background: var(--success-ink);
+  border-color: var(--success-ink);
+  color: #ffffff;
+}
+
+/* 만든 곳 */
+.g-about {
+  margin-top: 3.2em;
+  padding-top: 2em;
+  border-top: 1px solid var(--border);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+  gap: 1.5em 2.5em;
+  font-size: 0.94em;
+  color: var(--ink-soft);
+}
+
+.g-about p {
+  margin: 0;
+}
+
+.g-about ul {
+  margin: 0;
+  padding-left: 1.2em;
+}
+
+/* ===== 다른 탭: 글꼴과 제목만 맞춘다 ===== */
+body.web .recipes-heading {
+  font-family: var(--serif);
+  font-weight: 700;
+}
+
+body.web .recipes-view {
+  background: var(--bg);
+}
+
+body.web .btn-primary {
+  background: var(--primary);
+}
+
+body.web .btn-primary:hover:not(:disabled) {
+  background: var(--primary-hover);
+}
+
+/* ===== 휴대폰 ===== */
+@media (max-width: 600px) {
+  .g-wrap {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .g-header-row {
+    gap: 4px 12px;
+  }
+
+  body.web .g-tabs {
+    width: 100%;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 0 16px;
+  }
+
+  body.web .g-tabs .tab-btn {
+    flex: none;
+    font-size: 14px;
+  }
+
+  .g-font {
+    position: static;
+  }
+
+  .g-setup {
+    font-size: 16px;
+    padding-top: 1.6em;
+  }
+
+  body.font-large .g-setup {
+    font-size: 18px;
+  }
+
+  body.font-xlarge .g-setup {
+    font-size: 20px;
+  }
+
+  .g-steps {
+    gap: 12px;
+  }
+
+  /* 휴대폰에서는 단계 목록을 가로 세 칸으로 */
+  .g-step-list {
+    flex: 1 1 100%;
+    flex-direction: row;
+    gap: 6px;
+  }
+
+  .g-step-list li {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  .g-step {
+    flex-direction: column;
+    gap: 4px;
+    padding: 0.6em 0.3em;
+    text-align: center;
+  }
+
+  .g-step.active {
+    box-shadow: inset 0 -3px 0 var(--primary);
+  }
+
+  .g-step-text {
+    align-items: center;
+  }
+
+  .g-step-state {
+    display: none;
+  }
+
+  .g-btn-row .g-btn {
+    flex: 1 1 100%;
+  }
+}

@@ -22,7 +22,8 @@
         "needs": "ChatGPT 계정",
         "recommended": false
       },
-      "webReady": true
+      "webReady": true,
+      "webName": "ChatGPT"
     },
     {
       "id": "claude",
@@ -71,7 +72,7 @@
         "id": "first-question",
         "shortTitle": "2. 첫 질문",
         "title": "첫 질문! Gemini에 물어보기",
-        "summary": "① 아래 카드에서 [질문 복사하기]를 누르고 → ② 옆의 Gemini 창 입력칸을 한 번 누른 뒤 → ③ 붙여 넣으세요.",
+        "summary": "① 아래 질문 중 하나에서 [복사]를 누르고 → ② 옆의 Gemini 창 입력칸을 한 번 누른 뒤 → ③ 붙여 넣으세요.",
         "details": "붙여 넣기는 Mac은 Command+V, Windows는 Ctrl+V, 휴대폰은 입력칸을 길게 누르고 [붙여넣기]예요. Gemini 창이 안 보이면 Windows는 Alt+Tab, Mac은 Command+`(숫자 1 왼쪽 키)로 창을 바꿀 수 있어요. 창을 닫았다면 아래 [Gemini 창 다시 열기]를 누르세요. 답이 마음에 안 들면 \"더 짧게\", \"더 쉽게\"라고 다시 말하면 돼요. 대화를 해 보셨으면 맨 아래 버튼으로 완료 표시를 해 주세요.",
         "promptExamples": [
           {
@@ -93,7 +94,7 @@
         ],
         "web": {
           "notice": "",
-          "doneLabel": "첫 질문 해 봤어요",
+          "doneLabel": "질문해 봤어요",
           "reopenLabel": "Gemini 창 다시 열기"
         },
         "externalLink": {
@@ -105,13 +106,15 @@
         "id": "install-aigo",
         "shortTitle": "3. 앱 설치",
         "title": "에이아이고 앱으로 이어서 배우기",
-        "summary": "AI와 대화해 보셨나요? 에이아이고 앱은 컴퓨터에서 AI를 제대로 쓰기까지 한 걸음씩 알려 주는 앱이에요. 필요한 AI 프로그램 설치도 손쉽게 도와드려요.",
+        "summary": "에이아이고 앱은 AI를 매일 쓰기까지 필요한 설치와 설정을 한 걸음씩 알려 주는 무료 앱이에요. AI 프로그램 설치도 손쉽게 도와드려요. Mac · Windows 컴퓨터용이에요.",
         "details": "에이아이고 앱이 도와드리는 일: Gemini · Claude · ChatGPT 같은 AI 프로그램 설치와 로그인을 쉽게, 작업 폴더와 말투 규칙(AI 수첩) 만들기, 복용약 체크표·식단표 같은 생활 자동화 레시피, 휴대폰 텔레그램으로 알림 받기. Mac · Windows 컴퓨터용이에요.",
         "web": {
-          "notice": "처음 한 번은 컴퓨터가 \"확인되지 않은 앱\"이라며 막아요. 앱 받기 화면에 여는 법을 차례대로 적어 두었어요.",
+          "notice": "무료로 나눠 드리는 앱이라 Apple · Microsoft의 유료 인증을 아직 받지 않았어요. 그래서 처음 한 번은 \"확인되지 않은 앱\"이라는 경고가 떠요. 여는 법은 앱 받기 화면에 차례대로 적어 두었어요.",
           "gotoTab": "app",
-          "buttonLabel": "에이아이고 앱 받으러 가기",
-          "doneLabel": "설치했어요"
+          "buttonLabel": "앱 받기 화면으로",
+          "doneLabel": "설치했어요",
+          "optional": true,
+          "noticeTitle": "미리 알려 드려요"
         }
       }
     ],
@@ -136,7 +139,7 @@
         "id": "first-question",
         "shortTitle": "2. 첫 질문",
         "title": "첫 질문! Claude에 물어보기",
-        "summary": "① 아래 카드에서 [질문 복사하기]를 누르고 → ② 옆의 Claude 창 입력칸을 한 번 누른 뒤 → ③ 붙여 넣으세요.",
+        "summary": "① 아래 질문 중 하나에서 [복사]를 누르고 → ② 옆의 Claude 창 입력칸을 한 번 누른 뒤 → ③ 붙여 넣으세요.",
         "details": "붙여 넣기는 Mac은 Command+V, Windows는 Ctrl+V, 휴대폰은 입력칸을 길게 누르고 [붙여넣기]예요. Claude 창이 안 보이면 Windows는 Alt+Tab, Mac은 Command+`(숫자 1 왼쪽 키)로 창을 바꿀 수 있어요. 창을 닫았다면 아래 [Claude 창 다시 열기]를 누르세요. 답이 마음에 안 들면 \"더 짧게\", \"더 쉽게\"라고 다시 말하면 돼요. 대화를 해 보셨으면 맨 아래 버튼으로 완료 표시를 해 주세요.",
         "promptExamples": [
           {
@@ -158,7 +161,7 @@
         ],
         "web": {
           "notice": "",
-          "doneLabel": "첫 질문 해 봤어요",
+          "doneLabel": "질문해 봤어요",
           "reopenLabel": "Claude 창 다시 열기"
         },
         "externalLink": {
@@ -170,13 +173,15 @@
         "id": "install-aigo",
         "shortTitle": "3. 앱 설치",
         "title": "에이아이고 앱으로 이어서 배우기",
-        "summary": "AI와 대화해 보셨나요? 에이아이고 앱은 컴퓨터에서 AI를 제대로 쓰기까지 한 걸음씩 알려 주는 앱이에요. 필요한 AI 프로그램 설치도 손쉽게 도와드려요.",
+        "summary": "에이아이고 앱은 AI를 매일 쓰기까지 필요한 설치와 설정을 한 걸음씩 알려 주는 무료 앱이에요. AI 프로그램 설치도 손쉽게 도와드려요. Mac · Windows 컴퓨터용이에요.",
         "details": "에이아이고 앱이 도와드리는 일: Gemini · Claude · ChatGPT 같은 AI 프로그램 설치와 로그인을 쉽게, 작업 폴더와 말투 규칙(AI 수첩) 만들기, 복용약 체크표·식단표 같은 생활 자동화 레시피, 휴대폰 텔레그램으로 알림 받기. Mac · Windows 컴퓨터용이에요.",
         "web": {
-          "notice": "처음 한 번은 컴퓨터가 \"확인되지 않은 앱\"이라며 막아요. 앱 받기 화면에 여는 법을 차례대로 적어 두었어요.",
+          "notice": "무료로 나눠 드리는 앱이라 Apple · Microsoft의 유료 인증을 아직 받지 않았어요. 그래서 처음 한 번은 \"확인되지 않은 앱\"이라는 경고가 떠요. 여는 법은 앱 받기 화면에 차례대로 적어 두었어요.",
           "gotoTab": "app",
-          "buttonLabel": "에이아이고 앱 받으러 가기",
-          "doneLabel": "설치했어요"
+          "buttonLabel": "앱 받기 화면으로",
+          "doneLabel": "설치했어요",
+          "optional": true,
+          "noticeTitle": "미리 알려 드려요"
         }
       }
     ],
@@ -201,7 +206,7 @@
         "id": "first-question",
         "shortTitle": "2. 첫 질문",
         "title": "첫 질문! ChatGPT에 물어보기",
-        "summary": "① 아래 카드에서 [질문 복사하기]를 누르고 → ② 옆의 ChatGPT 창 입력칸을 한 번 누른 뒤 → ③ 붙여 넣으세요.",
+        "summary": "① 아래 질문 중 하나에서 [복사]를 누르고 → ② 옆의 ChatGPT 창 입력칸을 한 번 누른 뒤 → ③ 붙여 넣으세요.",
         "details": "붙여 넣기는 Mac은 Command+V, Windows는 Ctrl+V, 휴대폰은 입력칸을 길게 누르고 [붙여넣기]예요. ChatGPT 창이 안 보이면 Windows는 Alt+Tab, Mac은 Command+`(숫자 1 왼쪽 키)로 창을 바꿀 수 있어요. 창을 닫았다면 아래 [ChatGPT 창 다시 열기]를 누르세요. 답이 마음에 안 들면 \"더 짧게\", \"더 쉽게\"라고 다시 말하면 돼요. 대화를 해 보셨으면 맨 아래 버튼으로 완료 표시를 해 주세요.",
         "promptExamples": [
           {
@@ -223,7 +228,7 @@
         ],
         "web": {
           "notice": "",
-          "doneLabel": "첫 질문 해 봤어요",
+          "doneLabel": "질문해 봤어요",
           "reopenLabel": "ChatGPT 창 다시 열기"
         },
         "externalLink": {
@@ -235,13 +240,15 @@
         "id": "install-aigo",
         "shortTitle": "3. 앱 설치",
         "title": "에이아이고 앱으로 이어서 배우기",
-        "summary": "AI와 대화해 보셨나요? 에이아이고 앱은 컴퓨터에서 AI를 제대로 쓰기까지 한 걸음씩 알려 주는 앱이에요. 필요한 AI 프로그램 설치도 손쉽게 도와드려요.",
+        "summary": "에이아이고 앱은 AI를 매일 쓰기까지 필요한 설치와 설정을 한 걸음씩 알려 주는 무료 앱이에요. AI 프로그램 설치도 손쉽게 도와드려요. Mac · Windows 컴퓨터용이에요.",
         "details": "에이아이고 앱이 도와드리는 일: Gemini · Claude · ChatGPT 같은 AI 프로그램 설치와 로그인을 쉽게, 작업 폴더와 말투 규칙(AI 수첩) 만들기, 복용약 체크표·식단표 같은 생활 자동화 레시피, 휴대폰 텔레그램으로 알림 받기. Mac · Windows 컴퓨터용이에요.",
         "web": {
-          "notice": "처음 한 번은 컴퓨터가 \"확인되지 않은 앱\"이라며 막아요. 앱 받기 화면에 여는 법을 차례대로 적어 두었어요.",
+          "notice": "무료로 나눠 드리는 앱이라 Apple · Microsoft의 유료 인증을 아직 받지 않았어요. 그래서 처음 한 번은 \"확인되지 않은 앱\"이라는 경고가 떠요. 여는 법은 앱 받기 화면에 차례대로 적어 두었어요.",
           "gotoTab": "app",
-          "buttonLabel": "에이아이고 앱 받으러 가기",
-          "doneLabel": "설치했어요"
+          "buttonLabel": "앱 받기 화면으로",
+          "doneLabel": "설치했어요",
+          "optional": true,
+          "noticeTitle": "미리 알려 드려요"
         }
       }
     ]

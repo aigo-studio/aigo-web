@@ -1,5 +1,5 @@
 /**
- * 에이아이고 첫걸음 웹 페이지 (지시서 08)
+ * 에이아이고 첫걸음 안내 웹 페이지 (지시서 08, 'B안 · 차분한 안내서' 화면)
  * content.json(빌드 때 엔진에서 뽑은 글)을 읽어 그린다. Node · Electron API는 쓰지 않는다.
  * 진행(고른 비서 · 글씨 크기 · 완료 표시)은 이 브라우저의 localStorage에만 둔다. 서버로 보내는 것은 없다.
  */
@@ -23,8 +23,9 @@
 
   const $ = (id) => document.getElementById(id);
   const el = {
-    agentSummary: $('agent-summary-text'),
-    changeAgentBtn: $('change-agent-btn'),
+    agentPicker: $('agent-picker'),
+    ollamaNote: $('ollama-note'),
+    setupView: $('setup-view'),
     fontSelector: $('font-size-selector'),
     tabs: $('main-tabs'),
     views: {
@@ -34,27 +35,24 @@
       app: $('app-view'),
     },
     stepList: $('step-list'),
-    progressCount: $('progress-count'),
-    progressFill: $('progress-fill'),
     nextCard: $('next-card'),
-    nextCardOpenBtn: $('next-card-open-btn'),
     nextCardCloseBtn: $('next-card-close-btn'),
     stepCard: $('step-card'),
     mobileNotice: $('mobile-notice'),
     copyUrlBtn: $('copy-url-btn'),
     stepNumber: $('step-number'),
-    statusBadge: $('step-status-badge'),
     stepTitle: $('step-title'),
     stepSummary: $('step-summary'),
     stepDetails: $('step-details'),
     stepDetailsText: $('step-details-text'),
     stepNotice: $('step-notice'),
     prompts: $('prompt-examples-wrap'),
+    linkAddress: $('link-address'),
+    linkAddressHost: $('link-address-host'),
+    linkAddressOwner: $('link-address-owner'),
     linkBtn: $('external-link-btn'),
     reopenBtn: $('reopen-link-btn'),
     doneBtn: $('done-btn'),
-    prevBtn: $('prev-btn'),
-    nextBtn: $('next-btn'),
     glossaryPageSearch: $('glossary-page-search'),
     glossaryPageList: $('glossary-page-list'),
     drawer: $('glossary-drawer'),
@@ -68,14 +66,6 @@
     tooltipMeaning: $('glossary-tooltip-meaning'),
     tooltipAnalogy: $('glossary-tooltip-analogy'),
     appVersion: $('app-version'),
-    welcome: {
-      view: $('welcome-view'),
-      progress: $('welcome-progress'),
-      body: $('welcome-body'),
-      prevBtn: $('welcome-prev-btn'),
-      nextBtn: $('welcome-next-btn'),
-      closeBtn: $('welcome-close-btn'),
-    },
   };
 
   // --- 저장 (localStorage가 막힌 브라우저에서도 화면은 돈다) ---
@@ -150,7 +140,9 @@
     if (scale === 'large') document.body.classList.add('font-large');
     if (scale === 'xlarge') document.body.classList.add('font-xlarge');
     el.fontSelector.querySelectorAll('.font-btn').forEach((btn) => {
-      btn.classList.toggle('active', btn.getAttribute('data-scale') === scale);
+      const on = btn.getAttribute('data-scale') === scale;
+      btn.classList.toggle('active', on);
+      btn.setAttribute('aria-pressed', on ? 'true' : 'false');
     });
     writeStore(STORE.font, scale);
   }
@@ -172,33 +164,60 @@
     window.scrollTo(0, 0);
   }
 
-  // --- 1부 화면 ---
-  function renderAgentBar() {
-    const agent = agentById(state.agentId);
-    el.agentSummary.textContent = agent ? agent.name : '아직 고르지 않았어요';
-  }
+  // --- 첫걸음 화면 ---
+  const OWNER_KO = { Google: '구글' };
 
-  function renderSidebar() {
-    el.stepList.innerHTML = '';
-    const list = steps();
-    list.forEach((step, idx) => {
-      const done = isDone(step.id);
+  function renderAgentPicker() {
+    el.agentPicker.innerHTML = '';
+    agents().forEach((agent) => {
+      const w = agent.welcome || {};
+      const on = agent.id === state.agentId;
       const btn = document.createElement('button');
       btn.type = 'button';
-      btn.className = `step-item${idx === state.stepIndex ? ' active' : ''}${done ? ' done' : ''}`;
-      btn.title = step.title;
+      btn.className = `g-pick-item${on ? ' selected' : ''}${agent.webReady ? '' : ' app-only'}`;
+      btn.setAttribute('role', 'radio');
+      btn.setAttribute('aria-checked', on ? 'true' : 'false');
       btn.innerHTML = `
-        <span class="step-item-name">${esc(step.shortTitle)}</span>
-        <span class="step-dot${done ? ' done' : ''}">${done ? '완료' : '대기'}</span>
+        <span class="g-radio" aria-hidden="true"></span>
+        <span class="g-pick-text">
+          <span class="g-pick-name">${esc(agent.webName || agent.name)}</span>
+          <span class="g-pick-need">${esc(agent.webReady ? w.needs : '앱에서만 할 수 있어요')}</span>
+        </span>
+      `;
+      btn.addEventListener('click', () => {
+        if (!agent.webReady) {
+          el.ollamaNote.classList.remove('hidden');
+          return;
+        }
+        el.ollamaNote.classList.add('hidden');
+        if (agent.id !== state.agentId) selectAgent(agent.id);
+      });
+      el.agentPicker.appendChild(btn);
+    });
+  }
+
+  function renderStepList() {
+    el.stepList.innerHTML = '';
+    steps().forEach((step, idx) => {
+      const done = isDone(step.id);
+      const active = idx === state.stepIndex;
+      const li = document.createElement('li');
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = `g-step${active ? ' active' : ''}${done ? ' done' : ''}`;
+      if (active) btn.setAttribute('aria-current', 'step');
+      const name = String(step.shortTitle || step.title).replace(/^\d+\.\s*/, '');
+      btn.innerHTML = `
+        <span class="g-step-num" aria-hidden="true">${done ? '✓' : idx + 1}</span>
+        <span class="g-step-text">
+          <span class="g-step-name">${esc(name)}</span>
+          <span class="g-step-state">${active ? '지금 하는 단계' : done ? '했어요' : '아직'}</span>
+        </span>
       `;
       btn.addEventListener('click', () => goToStep(idx));
-      el.stepList.appendChild(btn);
+      li.appendChild(btn);
+      el.stepList.appendChild(li);
     });
-
-    const doneCount = list.filter((s) => isDone(s.id)).length;
-    el.progressCount.textContent = `${doneCount} / ${list.length} 완료`;
-    el.progressFill.style.width = list.length ? `${(doneCount / list.length) * 100}%` : '0%';
-    el.nextCardOpenBtn.classList.toggle('hidden', !allDone());
   }
 
   function renderPrompts(examples) {
@@ -208,21 +227,27 @@
       return;
     }
     examples.forEach((item) => {
-      const card = document.createElement('div');
-      card.className = 'prompt-card';
-      const cat = document.createElement('div');
-      cat.className = 'prompt-category';
+      const li = document.createElement('li');
+      li.className = 'g-prompt';
+      const text = document.createElement('div');
+      text.className = 'g-prompt-text';
+      const cat = document.createElement('span');
+      cat.className = 'g-prompt-cat';
       cat.textContent = item.category;
-      const text = document.createElement('p');
-      text.className = 'prompt-text';
-      text.textContent = item.text;
+      const body = document.createElement('span');
+      body.textContent = item.text;
+      text.append(cat, body);
       const btn = document.createElement('button');
       btn.type = 'button';
-      btn.className = 'prompt-copy-btn';
-      btn.textContent = '질문 복사하기';
-      btn.addEventListener('click', () => copyText(btn, item.text, '질문 복사하기', '복사 완료! AI 창에 붙여 넣으세요'));
-      card.append(cat, text, btn);
-      el.prompts.appendChild(card);
+      btn.className = 'g-btn g-btn-outline g-copy';
+      btn.textContent = '복사';
+      btn.addEventListener('click', async () => {
+        await copyText(btn, item.text, '복사', '복사됐어요');
+        btn.classList.add('copied');
+        setTimeout(() => btn.classList.remove('copied'), 1800);
+      });
+      li.append(text, btn);
+      el.prompts.appendChild(li);
     });
     el.prompts.classList.remove('hidden');
   }
@@ -237,9 +262,7 @@
     // 앱 설치 단계만 컴퓨터가 필요하다 (웹에서 열기 · 첫 질문은 휴대폰에서도 된다)
     el.mobileNotice.classList.toggle('hidden', !(web.gotoTab === 'app' && MOBILE_QUERY.matches));
 
-    el.stepNumber.textContent = `${state.stepIndex + 1}단계 / ${list.length}단계`;
-    el.statusBadge.textContent = done ? '완료됨' : '아직 안 함';
-    el.statusBadge.className = `status-badge${done ? ' done' : ''}`;
+    el.stepNumber.textContent = `${state.stepIndex + 1}단계 / ${list.length}단계${web.optional ? ' · 원하실 때만' : ''}`;
     el.stepTitle.textContent = step.title;
     el.stepSummary.innerHTML = hl(web.summary || step.summary);
 
@@ -249,7 +272,8 @@
     el.stepDetails.open = false;
 
     const notice = web.notice !== undefined ? web.notice : '';
-    el.stepNotice.innerHTML = hl(notice);
+    el.stepNotice.innerHTML = (web.noticeTitle ? `<strong>${esc(web.noticeTitle)}</strong>` : '') + hl(notice);
+    el.stepNotice.classList.toggle('warn', Boolean(web.noticeTitle));
     el.stepNotice.classList.toggle('hidden', !notice);
 
     renderPrompts(step.promptExamples);
@@ -266,14 +290,24 @@
       el.linkBtn.textContent = web.buttonLabel;
       el.linkBtn.classList.remove('hidden');
     } else if (web.buttonLabel && url && url.startsWith('https://')) {
+      // 버튼 이름에 갈 주소를 그대로 적는다 (어디로 가는지 알고 누르게)
       el.linkBtn.href = url;
       el.linkBtn.target = '_blank';
       el.linkBtn.dataset.track = `web/open/${state.agentId}`;
-      el.linkBtn.textContent = web.buttonLabel;
+      el.linkBtn.textContent = `${new URL(url).hostname} 새 창으로 열기`;
       el.linkBtn.classList.remove('hidden');
     } else {
       el.linkBtn.removeAttribute('href');
       el.linkBtn.classList.add('hidden');
+    }
+
+    const showAddress = !gotoTab && web.buttonLabel && url && url.startsWith('https://');
+    el.linkAddress.classList.toggle('hidden', !showAddress);
+    if (showAddress) {
+      const agent = agentById(state.agentId);
+      const owner = agent ? OWNER_KO[agent.provider] || agent.provider : '';
+      el.linkAddressHost.textContent = new URL(url).hostname;
+      el.linkAddressOwner.textContent = owner ? `(${owner} 공식)` : '';
     }
 
     if (web.reopenLabel && url && url.startsWith('https://')) {
@@ -286,14 +320,13 @@
     }
 
     const doneLabel = web.doneLabel || '했어요';
-    el.doneBtn.textContent = done ? `✓ ${doneLabel} (완료 표시 지우기)` : `${doneLabel} (완료 표시)`;
+    const isLast = state.stepIndex >= list.length - 1;
+    el.doneBtn.textContent = done ? `✓ ${doneLabel} (완료 표시 지우기)` : isLast ? doneLabel : `${doneLabel}, 다음 단계로`;
     el.doneBtn.classList.toggle('is-done', done);
-    // 링크 버튼이 없는 단계(로그인 · 첫 대화)는 완료 버튼이 주 버튼
-    el.doneBtn.classList.toggle('btn-primary', !done && el.linkBtn.classList.contains('hidden'));
-    el.doneBtn.classList.toggle('btn-secondary', done || !el.linkBtn.classList.contains('hidden'));
-
-    el.prevBtn.disabled = state.stepIndex === 0;
-    el.nextBtn.disabled = state.stepIndex >= list.length - 1;
+    // 링크 버튼이 없는 단계(첫 질문)는 완료 버튼이 주 버튼
+    const primary = !done && el.linkBtn.classList.contains('hidden');
+    el.doneBtn.classList.toggle('g-btn-primary', primary);
+    el.doneBtn.classList.toggle('g-btn-outline', !primary);
   }
 
   function renderNextCard() {
@@ -301,8 +334,8 @@
   }
 
   function renderSetup() {
-    renderAgentBar();
-    renderSidebar();
+    renderAgentPicker();
+    renderStepList();
     renderStep();
     renderNextCard();
   }
@@ -378,170 +411,6 @@
     renderSetup();
     window.LearnTab.render();
   }
-
-  // --- 처음 화면: 환영 → 비서 고르기 ---
-  const Welcome = (() => {
-    let page = 'hello';
-    let choice = null;
-    let ollamaNote = false;
-
-    function close() {
-      el.welcome.view.classList.add('hidden');
-      document.body.classList.remove('welcome-open');
-    }
-
-    function card({ name, desc, needs, tag, tagClass, selected, onPick }) {
-      const btn = document.createElement('button');
-      btn.type = 'button';
-      btn.className = `welcome-card${selected ? ' selected' : ''}`;
-      btn.setAttribute('aria-pressed', selected ? 'true' : 'false');
-      btn.innerHTML = `
-        ${tag ? `<span class="${tagClass}">${esc(tag)}</span>` : ''}
-        <span class="welcome-card-name">${esc(name)}</span>
-        <span class="welcome-card-desc">${esc(desc)}</span>
-        ${needs ? `<span class="welcome-card-needs"><strong>필요한 것:</strong> ${esc(needs)}</span>` : ''}
-      `;
-      btn.addEventListener('click', onPick);
-      return btn;
-    }
-
-    function renderHello() {
-      el.welcome.body.innerHTML = `
-        <img class="web-welcome-logo" src="./assets/icon.png" alt="" aria-hidden="true" />
-        <h1 id="welcome-title" class="welcome-title">에이아이고 첫걸음</h1>
-        <p class="welcome-text">설치 프로그램 없이, 이 페이지만 보고 AI 비서와 첫 대화까지 해 봐요.</p>
-        <p class="welcome-text">글씨가 작으면 아래에서 크게 바꿔 주세요.</p>
-      `;
-      const group = document.createElement('div');
-      group.className = 'welcome-font-group';
-      group.setAttribute('role', 'group');
-      group.setAttribute('aria-label', '글씨 크기');
-      const current = currentFontScale();
-      [
-        ['normal', '보통'],
-        ['large', '크게'],
-        ['xlarge', '아주 크게'],
-      ].forEach(([id, label]) => {
-        const btn = document.createElement('button');
-        btn.type = 'button';
-        btn.className = `welcome-font-btn${id === current ? ' selected' : ''}`;
-        btn.setAttribute('aria-pressed', id === current ? 'true' : 'false');
-        btn.textContent = label;
-        btn.addEventListener('click', () => {
-          applyFontScale(id);
-          render();
-        });
-        group.appendChild(btn);
-      });
-      el.welcome.body.appendChild(group);
-    }
-
-    function renderAgent() {
-      el.welcome.body.innerHTML = `
-        <h1 id="welcome-title" class="welcome-title">어떤 AI 비서와 시작할까요?</h1>
-        <p class="welcome-text">평소 쓰시는 계정이 있는 쪽을 고르시면 편해요. 나중에 바꿀 수 있어요.</p>
-      `;
-      const grid = document.createElement('div');
-      grid.className = 'welcome-grid';
-      agents().forEach((agent) => {
-        const w = agent.welcome || {};
-        const tag = !agent.webReady ? '앱이 필요해요' : w.recommended ? '처음이시면 추천' : '';
-        grid.appendChild(
-          card({
-            name: agent.name,
-            desc: w.desc,
-            needs: w.needs,
-            tag,
-            tagClass: agent.webReady ? 'welcome-rec' : 'welcome-rec web-tag-app',
-            selected: agent.id === choice,
-            onPick: () => {
-              if (!agent.webReady) {
-                ollamaNote = true;
-                choice = null;
-              } else {
-                ollamaNote = false;
-                choice = agent.id;
-              }
-              render();
-            },
-          })
-        );
-      });
-      el.welcome.body.appendChild(grid);
-
-      if (ollamaNote) {
-        const note = document.createElement('div');
-        note.className = 'welcome-dryrun-note web-ollama-note';
-        note.innerHTML = `
-          <p>로컬 Ollama는 AI 모델을 내려받을 때 까만 터미널 창이 필요해서, 이 웹 페이지로는 도와드릴 수 없어요.
-          에이아이고 앱을 받으시면 버튼 하나로 해 드려요.</p>
-        `;
-        const link = document.createElement('button');
-        link.type = 'button';
-        link.className = 'btn btn-secondary';
-        link.textContent = '에이아이고 앱 받으러 가기';
-        link.addEventListener('click', () => {
-          close();
-          showTab('app');
-        });
-        note.appendChild(link);
-        el.welcome.body.appendChild(note);
-      }
-
-      const unsure = document.createElement('button');
-      unsure.type = 'button';
-      unsure.className = 'welcome-unsure';
-      unsure.textContent = '잘 모르겠어요 — 추천으로 할게요';
-      unsure.addEventListener('click', () => {
-        const rec = agents().find((a) => a.webReady && a.welcome && a.welcome.recommended);
-        choice = (rec || agents().find((a) => a.webReady)).id;
-        finish();
-      });
-      el.welcome.body.appendChild(unsure);
-    }
-
-    function render() {
-      el.welcome.progress.textContent = page === 'hello' ? '1 / 2' : '2 / 2';
-      el.welcome.prevBtn.classList.toggle('hidden', page === 'hello');
-      el.welcome.nextBtn.textContent = page === 'hello' ? '다음' : '이 비서로 시작하기';
-      el.welcome.nextBtn.disabled = page === 'agent' && !choice;
-      el.welcome.closeBtn.classList.toggle('hidden', !state.agentId);
-      if (page === 'hello') renderHello();
-      else renderAgent();
-    }
-
-    function finish() {
-      close();
-      selectAgent(choice);
-      showTab('setup');
-    }
-
-    function open(startAt) {
-      page = startAt;
-      choice = state.agentId;
-      ollamaNote = false;
-      el.welcome.view.classList.remove('hidden');
-      document.body.classList.add('welcome-open');
-      render();
-      el.welcome.view.scrollTop = 0;
-    }
-
-    el.welcome.prevBtn.addEventListener('click', () => {
-      page = 'hello';
-      render();
-    });
-    el.welcome.nextBtn.addEventListener('click', () => {
-      if (page === 'hello') {
-        page = 'agent';
-        render();
-        return;
-      }
-      if (choice) finish();
-    });
-    el.welcome.closeBtn.addEventListener('click', close);
-
-    return { open };
-  })();
 
   // --- 용어사전 (호버 말풍선 · 클릭하면 서랍 · 검색). 드래그 풀이는 없다 ---
   function glossaryItemHtml(entry) {
@@ -744,7 +613,6 @@
       const btn = e.target.closest('.font-btn');
       if (btn) applyFontScale(btn.getAttribute('data-scale') || 'normal');
     });
-    el.changeAgentBtn.addEventListener('click', () => Welcome.open('agent'));
     el.doneBtn.addEventListener('click', onDoneClick);
     el.linkBtn.addEventListener('click', (e) => {
       const goto = el.linkBtn.dataset.goto;
@@ -761,18 +629,11 @@
       trackEvent(`web/reopen/${state.agentId}`);
       openAiWindow(e, el.reopenBtn.href);
     });
-    el.prevBtn.addEventListener('click', () => goToStep(state.stepIndex - 1));
-    el.nextBtn.addEventListener('click', () => goToStep(state.stepIndex + 1));
     el.nextCardCloseBtn.addEventListener('click', () => {
       state.nextCardClosed = true;
       renderNextCard();
     });
-    el.nextCardOpenBtn.addEventListener('click', () => {
-      state.nextCardClosed = false;
-      renderNextCard();
-      el.nextCard.scrollIntoView({ block: 'start', behavior: 'smooth' });
-    });
-    el.nextCard.addEventListener('click', (e) => {
+    el.setupView.addEventListener('click', (e) => {
       const btn = e.target.closest('[data-goto]');
       if (btn) showTab(btn.getAttribute('data-goto'));
     });
@@ -824,16 +685,12 @@
       getDryRun: () => true,
     });
 
+    // 처음 오신 분은 추천 비서(Gemini)로 시작한다. 위에서 언제든 바꿀 수 있다
     const saved = readStore(STORE.agent, null);
     const savedAgent = saved && agentById(saved);
-    if (savedAgent && savedAgent.webReady) {
-      selectAgent(saved, { track: false });
-      hideBoot();
-    } else {
-      renderAgentBar();
-      hideBoot();
-      Welcome.open('hello');
-    }
+    const rec = agents().find((a) => a.webReady && a.welcome && a.welcome.recommended) || agents().find((a) => a.webReady);
+    selectAgent(savedAgent && savedAgent.webReady ? saved : rec.id, { track: false });
+    hideBoot();
   }
 
   boot().catch(showBootError);
